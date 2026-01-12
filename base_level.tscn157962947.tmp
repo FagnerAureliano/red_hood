@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://dejdc3log8cny"]
+
+[ext_resource type="PackedScene" uid="uid://bavlbejcriytc" path="res://background/background.tscn" id="1_5vx1e"]
+[ext_resource type="PackedScene" uid="uid://bhowyfevd0lfp" path="res://terrain/Terrain.tscn" id="2_eesb3"]
+[ext_resource type="PackedScene" uid="uid://724f011om128" path="res://character/character.tscn" id="3_eesb3"]
+
+[node name="BaseLevel" type="Node2D"]
+
+[node name="Background" parent="." instance=ExtResource("1_5vx1e")]
+
+[node name="Terrain" parent="." instance=ExtResource("2_eesb3")]
+
+[node name="Character" parent="." instance=ExtResource("3_eesb3")]
+position = Vector2(-1, 0)
+
+[node name="Camera2D" type="Camera2D" parent="Character"]

@@ -1,0 +1,85 @@
+[gd_scene load_steps=11 format=3 uid="uid://bs1ebcii77o5r"]
+
+[ext_resource type="PackedScene" uid="uid://cs3hg7fulrtmd" path="res://character/collectable/collectable_component.tscn" id="1_haxkk"]
+[ext_resource type="Texture2D" uid="uid://c0bob8yd0y6ii" path="res://character/collectable/sword/sword.png" id="2_pqv3u"]
+[ext_resource type="Script" path="res://character/collectable/sword/collectable_sword.gd" id="3_sword_script"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jw55m"]
+atlas = ExtResource("2_pqv3u")
+region = Rect2(7, 0, 103, 194)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ot8mg"]
+atlas = ExtResource("2_pqv3u")
+region = Rect2(110, 0, 103, 194)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vdt0m"]
+atlas = ExtResource("2_pqv3u")
+region = Rect2(213, 0, 103, 194)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i3mlf"]
+atlas = ExtResource("2_pqv3u")
+region = Rect2(316, 0, 103, 194)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hnhtb"]
+atlas = ExtResource("2_pqv3u")
+region = Rect2(419, 0, 103, 194)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_65q2q"]
+atlas = ExtResource("2_pqv3u")
+region = Rect2(522, 0, 103, 194)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m35th"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jw55m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ot8mg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vdt0m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i3mlf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hnhtb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_65q2q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hnhtb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i3mlf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vdt0m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ot8mg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mmxnd"]
+size = Vector2(4, 38)
+
+[node name="CollectableSword" instance=ExtResource("1_haxkk")]
+scale = Vector2(0.8, 0.8)
+script = ExtResource("3_sword_script")
+
+[node name="Texture-AnimatedSprite2D" parent="." index="0"]
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_m35th")
+autoplay = "default"
+frame_progress = 0.70645183
+
+[node name="CollisionShape2D" parent="." index="1"]
+visible = false
+position = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_mmxnd")

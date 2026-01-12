@@ -1,0 +1,164 @@
+[gd_scene load_steps=14 format=3 uid="uid://bavlbejcriytc"]
+
+[ext_resource type="Texture2D" uid="uid://c8s6fipsvdy4x" path="res://background/Layer_0010_1.png" id="1_02vw1"]
+[ext_resource type="Texture2D" uid="uid://dh3wm1ituhvqr" path="res://background/Layer_0011_0.png" id="1_c1rwe"]
+[ext_resource type="Texture2D" uid="uid://bepxh60pjjlkn" path="res://background/Layer_0009_2.png" id="3_ni5mi"]
+[ext_resource type="Texture2D" uid="uid://d1mu1dqiutjgk" path="res://background/Layer_0008_3.png" id="4_ien62"]
+[ext_resource type="Texture2D" uid="uid://cwqi50dygy7fh" path="res://background/Layer_0007_Lights.png" id="5_ubnx6"]
+[ext_resource type="Texture2D" uid="uid://cnj4a61qm5j73" path="res://background/Layer_0006_4.png" id="6_bjhxj"]
+[ext_resource type="Texture2D" uid="uid://c0fx6u1w75x1d" path="res://background/Layer_0005_5.png" id="7_7sr7t"]
+[ext_resource type="Texture2D" uid="uid://cts70b44lpyvq" path="res://background/Layer_0004_Lights.png" id="8_par6p"]
+[ext_resource type="Texture2D" uid="uid://xvfe0smyews7" path="res://background/Layer_0003_6.png" id="9_44e7v"]
+[ext_resource type="Texture2D" uid="uid://b8n1fgitnsige" path="res://background/Layer_0002_7.png" id="10_lkpg0"]
+[ext_resource type="Texture2D" uid="uid://oo2idpg1ndne" path="res://background/Layer_0001_8.png" id="11_fvtuo"]
+[ext_resource type="Texture2D" uid="uid://dkj6ywlkk5one" path="res://background/Layer_0000_9.png" id="12_ien62"]
+[ext_resource type="Script" path="res://background.gd" id="13_bgscript"]
+
+[node name="Background" type="ParallaxBackground"]
+script = ExtResource("13_bgscript")
+
+[node name="Sky" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(1, 0.1)
+
+[node name="Texture" type="TextureRect" parent="Sky"]
+custom_minimum_size = Vector2(640, 360)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_02vw1")
+expand_mode = 1
+
+[node name="DefaultBackground" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(1, 0.1)
+motion_mirroring = Vector2(640, 0)
+
+[node name="Texture" type="TextureRect" parent="DefaultBackground"]
+custom_minimum_size = Vector2(640, 360)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_c1rwe")
+expand_mode = 1
+
+[node name="TreeT1" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.1, 0.1)
+motion_mirroring = Vector2(640, 0)
+
+[node name="Texture" type="TextureRect" parent="TreeT1"]
+custom_minimum_size = Vector2(640, 360)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_ni5mi")
+expand_mode = 1
+
+[node name="TreeT2" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.2, 0.1)
+motion_mirroring = Vector2(640, 0)
+
+[node name="Texture" type="TextureRect" parent="TreeT2"]
+custom_minimum_size = Vector2(640, 360)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("4_ien62")
+expand_mode = 1
+
+[node name="LightsT1" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.3, 0.1)
+motion_mirroring = Vector2(640, 0)
+
+[node name="Texture" type="TextureRect" parent="LightsT1"]
+custom_minimum_size = Vector2(640, 360)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("5_ubnx6")
+expand_mode = 1
+
+[node name="TreeT3" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.4, 0.1)
+motion_mirroring = Vector2(640, 0)
+
+[node name="Texture" type="TextureRect" parent="TreeT3"]
+custom_minimum_size = Vector2(640, 360)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("6_bjhxj")
+expand_mode = 1
+
+[node name="TreeT4" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.5, 0.1)
+motion_mirroring = Vector2(640, 0)
+
+[node name="Texture" type="TextureRect" parent="TreeT4"]
+custom_minimum_size = Vector2(640, 360)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("7_7sr7t")
+expand_mode = 1
+
+[node name="LightsT2" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.6, 0.1)
+motion_mirroring = Vector2(640, 0)
+
+[node name="Texture" type="TextureRect" parent="LightsT2"]
+custom_minimum_size = Vector2(640, 360)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("8_par6p")
+expand_mode = 1
+
+[node name="TreeT5" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.7, 0.1)
+motion_mirroring = Vector2(640, 0)
+
+[node name="Texture" type="TextureRect" parent="TreeT5"]
+custom_minimum_size = Vector2(640, 360)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("9_44e7v")
+expand_mode = 1
+
+[node name="TreeT6" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.8, 0.1)
+motion_mirroring = Vector2(640, 0)
+
+[node name="Texture" type="TextureRect" parent="TreeT6"]
+custom_minimum_size = Vector2(640, 360)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("10_lkpg0")
+expand_mode = 1
+
+[node name="TreeT7" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(1, 0.1)
+motion_mirroring = Vector2(640, 0)
+
+[node name="Texture" type="TextureRect" parent="TreeT7"]
+custom_minimum_size = Vector2(640, 360)
+offset_left = -1.0
+offset_top = -77.0
+offset_right = 639.0
+offset_bottom = 283.0
+texture = ExtResource("10_lkpg0")
+expand_mode = 1
+
+[node name="GroundT1" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(1, 0.1)
+motion_mirroring = Vector2(640, 0)
+
+[node name="Texture" type="TextureRect" parent="GroundT1"]
+custom_minimum_size = Vector2(640, 360)
+offset_left = 1.0
+offset_right = 641.0
+offset_bottom = 360.0
+texture = ExtResource("11_fvtuo")
+expand_mode = 1
+
+[node name="GroundT2" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(1, 0.1)
+motion_mirroring = Vector2(640, 0)
+
+[node name="Texture" type="TextureRect" parent="GroundT2"]
+custom_minimum_size = Vector2(640, 360)
+offset_left = 1.0
+offset_right = 641.0
+offset_bottom = 360.0
+texture = ExtResource("12_ien62")
+expand_mode = 1

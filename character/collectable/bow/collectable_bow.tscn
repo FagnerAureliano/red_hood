@@ -1,0 +1,67 @@
+[gd_scene load_steps=10 format=3 uid="uid://d22rr0rsb88u3"]
+
+[ext_resource type="PackedScene" uid="uid://cs3hg7fulrtmd" path="res://character/collectable/collectable_component.tscn" id="1_rjojk"]
+[ext_resource type="Texture2D" uid="uid://blj4cpl0ex5k3" path="res://character/collectable/bow/boww.png" id="2_wkx6y"]
+[ext_resource type="Script" uid="uid://bx7mvlf1il62u" path="res://character/collectable/bow/collectable_bow.gd" id="2_y4ru4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8t1v5"]
+atlas = ExtResource("2_wkx6y")
+region = Rect2(6, 0, 140, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ham4"]
+atlas = ExtResource("2_wkx6y")
+region = Rect2(146, 0, 140, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5syrq"]
+atlas = ExtResource("2_wkx6y")
+region = Rect2(286, 0, 140, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4q8y2"]
+atlas = ExtResource("2_wkx6y")
+region = Rect2(426, 0, 140, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_esqn7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8t1v5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ham4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5syrq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4q8y2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4q8y2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5syrq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8t1v5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f2vnc"]
+size = Vector2(16.5, 26.5)
+
+[node name="CollectableBow" instance=ExtResource("1_rjojk")]
+script = ExtResource("2_y4ru4")
+
+[node name="Texture-AnimatedSprite2D" parent="." index="0"]
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_esqn7")
+autoplay = "default"
+frame_progress = 0.50977886
+
+[node name="CollisionShape2D" parent="." index="1"]
+visible = false
+position = Vector2(0.75, 0.75)
+shape = SubResource("RectangleShape2D_f2vnc")
