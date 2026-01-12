@@ -644,7 +644,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_gnp1r")
 }],
 "loop": false,
-"name": &"attack_1_with_sword",
+"name": &"attack_1_with_knife",
 "speed": 20.0
 }, {
 "frames": [{
@@ -723,7 +723,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_53p4g")
 }],
 "loop": false,
-"name": &"attack_2_with_sword",
+"name": &"attack_2_with_knife",
 "speed": 20.0
 }, {
 "frames": [{
@@ -823,7 +823,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_evt3s")
 }],
 "loop": false,
-"name": &"attack_3_with_sword",
+"name": &"attack_3_with_knife",
 "speed": 20.0
 }, {
 "frames": [{
@@ -1027,7 +1027,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"run",
-"speed": 17.0
+"speed": 25.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3d8aq"]
@@ -1040,10 +1040,9 @@ _attack_combo_timer = NodePath("AttackCombo")
 
 [node name="Texture" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("_character")]
 sprite_frames = SubResource("SpriteFrames_kjduu")
-animation = &"archer_attack"
+animation = &"run"
 autoplay = "idle"
-frame = 8
-frame_progress = 1.0
+frame_progress = 0.29318288
 script = ExtResource("3_ugqs2")
 _character = NodePath("..")
 
@@ -1056,4 +1055,5 @@ shape = SubResource("RectangleShape2D_3d8aq")
 wait_time = 0.64
 one_shot = true
 
+[connection signal="frame_changed" from="Texture" to="Texture" method="_on_frame_changed"]
 [connection signal="timeout" from="AttackCombo" to="." method="_on_attack_combo_timeout"]

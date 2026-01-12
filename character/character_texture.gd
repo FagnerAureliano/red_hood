@@ -61,3 +61,10 @@ func _on_animation_finished() -> void:
 	if _character != null and _character.has_method("_on_action_finished"):
 		_character.call("_on_action_finished", _current_action)
 	_current_action = ""
+
+
+func _on_frame_changed() -> void:
+	if animation == "run":
+		if frame == 2 or frame == 8 or frame == 14 or frame == 20:
+			global.spawn_effect("res://visual_effects/dust_particles/run/run_effect.tscn",
+			Vector2(0, 11), global_position, flip_h)

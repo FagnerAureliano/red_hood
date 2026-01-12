@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c6t22uh2ki33d"
-path="res://.godot/imported/2.png-77814ee17da762b3a7c191c2ec9060d2.ctex"
+path="res://.godot/imported/2.png-a2dea47eb4db18c00bc4ddc92ab48c91.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://visual_effects/sword/air_attack_1/2.png"
-dest_files=["res://.godot/imported/2.png-77814ee17da762b3a7c191c2ec9060d2.ctex"]
+source_file="res://visual_effects/knife/air_attack_1/2.png"
+dest_files=["res://.godot/imported/2.png-a2dea47eb4db18c00bc4ddc92ab48c91.ctex"]
 
 [params]
 
