@@ -1,0 +1,36 @@
+[gd_scene load_steps=8 format=3 uid="uid://wt2mfxonckme"]
+
+[ext_resource type="PackedScene" uid="uid://dx86quk1yycsx" path="res://visual_effects/components/base_effect.tscn" id="1_6n2bk"]
+[ext_resource type="Texture2D" uid="uid://dufm5rso2ur0u" path="res://visual_effects/dust_particles/run/1.png" id="2_gtkvo"]
+[ext_resource type="Texture2D" uid="uid://b07i6el0bdykf" path="res://visual_effects/dust_particles/run/2.png" id="3_r7vsy"]
+[ext_resource type="Texture2D" uid="uid://bh0v4q1rvcl34" path="res://visual_effects/dust_particles/run/3.png" id="4_ajmpp"]
+[ext_resource type="Texture2D" uid="uid://b5ktj6jvvb123" path="res://visual_effects/dust_particles/run/4.png" id="5_5mgso"]
+[ext_resource type="Texture2D" uid="uid://dibm506jqvss8" path="res://visual_effects/dust_particles/run/5.png" id="6_oteus"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6mtxl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_gtkvo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_r7vsy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ajmpp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_5mgso")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_oteus")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="RunEffect" instance=ExtResource("1_6n2bk")]
+sprite_frames = SubResource("SpriteFrames_6mtxl")
+frame = 4
+frame_progress = 1.0

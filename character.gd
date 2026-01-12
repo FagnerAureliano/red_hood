@@ -18,10 +18,19 @@ var _axe_combo_step: int = 0
 @export var _character_texture: CharacterTexture
 @export var _attack_combo_timer: Timer
 
+var _combo_wait_time_base: float = 0.0
 
-func _start_attack_combo_timer() -> void:
+func _ready() -> void:
+	if _attack_combo_timer != null:
+		_combo_wait_time_base = _attack_combo_timer.wait_time
+
+
+
+func _start_attack_combo_timer(extra_time_sec: float = 0.0) -> void:
 	if _attack_combo_timer == null:
 		return
+	if _combo_wait_time_base > 0.0:
+		_attack_combo_timer.wait_time = _combo_wait_time_base + extra_time_sec
 	_attack_combo_timer.start()
 
 
@@ -111,7 +120,7 @@ func sword_attack() -> void:
 	_character_texture.action_animation(anim_name)
 
 func axe_attack() -> void:
-	_start_attack_combo_timer()
+	_start_attack_combo_timer(0.2)
 	_axe_combo_step = (_axe_combo_step % 3) + 1
 	var anim_name := "attack_%d_with_axe" % _axe_combo_step
 

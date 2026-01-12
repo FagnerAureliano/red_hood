@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dx86quk1yycsx"]
+
+[ext_resource type="Script" uid="uid://djjp3xy5mr1k2" path="res://visual_effects/components/base_effect.gd" id="1_1c6vi"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ncdm5"]
+animations = [{
+"frames": [],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="BaseEffect" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_ncdm5")
+autoplay = "default"
+script = ExtResource("1_1c6vi")
+
+[connection signal="animation_finished" from="." to="." method="_on_animation_finished"]
