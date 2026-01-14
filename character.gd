@@ -114,8 +114,19 @@ func update_axe_state(_state: bool) -> void:
 
 func knife_attack() -> void:
 	_start_attack_combo_timer()
+
 	_knife_combo_step = (_knife_combo_step % 3) + 1
 	var anim_name := "attack_%d_with_knife" % _knife_combo_step
+	var offset := Vector2(40, 1)
+	if _character_texture.flip_h:
+		offset.x = -offset.x
+
+	global.spawn_effect(
+		"res://visual_effects/knife/attack_%d/attack_%d.tscn" % [_knife_combo_step, _knife_combo_step],
+		offset,
+		global_position,
+		_character_texture.flip_h
+	)
 
 	if not is_on_floor():
 		_character_texture.action_animation(anim_name)
@@ -127,6 +138,16 @@ func axe_attack() -> void:
 	_start_attack_combo_timer(0.2)
 	_axe_combo_step = (_axe_combo_step % 3) + 1
 	var anim_name := "attack_%d_with_axe" % _axe_combo_step
+	var offset := Vector2(30, 1)
+	if _character_texture.flip_h:
+		offset.x = -offset.x
+
+	global.spawn_effect(
+		"res://visual_effects/knife/attack_%d/attack_%d.tscn" % [_axe_combo_step, _axe_combo_step],
+		offset,
+		global_position,
+		_character_texture.flip_h
+	)
 
 	if not is_on_floor():
 		_character_texture.action_animation(anim_name)

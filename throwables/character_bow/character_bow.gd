@@ -4,5 +4,5 @@ class_name CharacterBow
 
 
 func _on_body_entered(_body: Node2D) -> void:
-	if _body is TileMap:
+	if _body is TileMapLayer:
 		queue_free()

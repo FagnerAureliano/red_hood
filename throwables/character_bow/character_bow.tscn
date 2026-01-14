@@ -16,7 +16,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mmy6m"]
-size = Vector2(10.75, 0.875)
+size = Vector2(10.375, 0.875)
 
 [node name="CharacterBow" instance=ExtResource("1_jn08l")]
 script = ExtResource("2_hdces")
@@ -26,5 +26,5 @@ scale = Vector2(0.02, 0.02)
 sprite_frames = SubResource("SpriteFrames_hdces")
 
 [node name="Collision" parent="." index="1"]
-position = Vector2(0, -0.5625)
+position = Vector2(-0.1875, -0.5625)
 shape = SubResource("RectangleShape2D_mmy6m")

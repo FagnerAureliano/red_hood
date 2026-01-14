@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://dm5ud02mrvyj1"]
+
+[ext_resource type="PackedScene" uid="uid://dx86quk1yycsx" path="res://visual_effects/components/base_effect.tscn" id="1_6mxmw"]
+[ext_resource type="Texture2D" uid="uid://bpwkcpkusbjyk" path="res://visual_effects/knife/attack_2/1.png" id="2_31isv"]
+[ext_resource type="Texture2D" uid="uid://bxc6wvcl1xt25" path="res://visual_effects/knife/attack_2/2.png" id="3_yegtn"]
+[ext_resource type="Texture2D" uid="uid://ot7ly1bytug8" path="res://visual_effects/knife/attack_2/3.png" id="4_pxvly"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x0ib2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_31isv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_yegtn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_pxvly")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="Attack2" instance=ExtResource("1_6mxmw")]
+sprite_frames = SubResource("SpriteFrames_x0ib2")
+frame = 2
+frame_progress = 1.0

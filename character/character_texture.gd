@@ -7,6 +7,7 @@ var _current_action: String = ""
 
 @export_category("Objects")
 @export var _character: BaseCharacter
+@export var _attack_area_colision: CollisionShape2D
 
 func _ready() -> void:
 	if _character == null:
@@ -16,6 +17,21 @@ func _ready() -> void:
 
 	if not animation_finished.is_connected(_on_animation_finished):
 		animation_finished.connect(_on_animation_finished)
+
+	if not animation_changed.is_connected(_on_animation_changed):
+		animation_changed.connect(_on_animation_changed)
+
+	_disable_attack_area()
+
+
+func _disable_attack_area() -> void:
+	if _attack_area_colision != null:
+		_attack_area_colision.disabled = true
+
+
+func _enable_attack_area() -> void:
+	if _attack_area_colision != null:
+		_attack_area_colision.disabled = false
 
 func animate(_velocity: Vector2) -> void:
 	_verify_direction(_velocity)
@@ -43,12 +59,18 @@ func is_in_action() -> bool:
 func _verify_direction(_velocity: Vector2) -> void:
 	if _velocity.x > 0:
 		flip_h = false
+		_attack_area_colision.position.x = absf(_attack_area_colision.position.x)
 	elif _velocity.x < 0:
 		flip_h = true
+		_attack_area_colision.position.x = -absf(_attack_area_colision.position.x)
 
 func action_animation(_action_name: String) -> void:
 	_is_on_action = true
 	_current_action = _action_name
+
+	# Safety: if the action gets interrupted before reaching the "disable" frame,
+	# we still won't leave the hitbox active.
+	_disable_attack_area()
 
 	if _action_name == "archer_attack":
 		play(_action_name)
@@ -56,6 +78,7 @@ func action_animation(_action_name: String) -> void:
 	play(_action_name)
 
 func _on_animation_finished() -> void:
+	_disable_attack_area()
 	_character.set_physics_process(true)
 	_is_on_action = false
 	if _character != null and _character.has_method("_on_action_finished"):
@@ -63,7 +86,26 @@ func _on_animation_finished() -> void:
 	_current_action = ""
 
 
+func _on_animation_changed() -> void:
+	# If a knife/axe attack gets interrupted (fall/jump/land/etc), make sure the
+	# hitbox isn't left active.
+	if not (animation.contains("knife") or animation.contains("axe")):
+		_disable_attack_area()
+
+
 func _on_frame_changed() -> void:
+	if animation.contains("knife"):
+		if frame == 0 or frame == 1:
+			_enable_attack_area()
+		else:
+			_disable_attack_area()
+	
+	if animation.contains("axe"):
+		if frame == 7 or frame == 8:
+			_enable_attack_area()
+		else:
+			_disable_attack_area()
+	
 	if animation == "archer_attack":
 		if frame == 8:
 			_character.spawn_bow_projectile(flip_h)
