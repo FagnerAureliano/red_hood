@@ -20,29 +20,29 @@ region = Rect2(224, 279, 112, 131)
 atlas = ExtResource("2_o6jyn")
 region = Rect2(336, 279, 112, 131)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_yu5j1"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_cffxo"]
 atlas = ExtResource("2_o6jyn")
-region = Rect2(448, 279, 112, 131)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_i4nyx"]
-atlas = ExtResource("2_o6jyn")
-region = Rect2(560, 279, 112, 131)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rpsx1"]
-atlas = ExtResource("2_o6jyn")
-region = Rect2(672, 279, 112, 131)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xdtjf"]
-atlas = ExtResource("2_o6jyn")
-region = Rect2(784, 279, 112, 131)
+region = Rect2(1008, 279, 112, 131)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5cdwl"]
 atlas = ExtResource("2_o6jyn")
 region = Rect2(896, 279, 112, 131)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cffxo"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_xdtjf"]
 atlas = ExtResource("2_o6jyn")
-region = Rect2(1008, 279, 112, 131)
+region = Rect2(784, 279, 112, 131)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rpsx1"]
+atlas = ExtResource("2_o6jyn")
+region = Rect2(672, 279, 112, 131)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i4nyx"]
+atlas = ExtResource("2_o6jyn")
+region = Rect2(560, 279, 112, 131)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yu5j1"]
+atlas = ExtResource("2_o6jyn")
+region = Rect2(448, 279, 112, 131)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gt0oi"]
 atlas = ExtResource("2_o6jyn")
@@ -565,26 +565,26 @@ animations = [{
 "texture": SubResource("AtlasTexture_4y0r6")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_yu5j1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_i4nyx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rpsx1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xdtjf")
+"texture": SubResource("AtlasTexture_cffxo")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5cdwl")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_cffxo")
+"texture": SubResource("AtlasTexture_xdtjf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rpsx1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i4nyx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yu5j1")
 }],
 "loop": false,
 "name": &"archer_attack",
-"speed": 15.0
+"speed": 18.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1040,9 +1040,10 @@ _attack_combo_timer = NodePath("AttackCombo")
 
 [node name="Texture" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("_character")]
 sprite_frames = SubResource("SpriteFrames_kjduu")
-animation = &"run"
+animation = &"archer_attack"
 autoplay = "idle"
-frame_progress = 0.29318288
+frame = 8
+frame_progress = 1.0
 script = ExtResource("3_ugqs2")
 _character = NodePath("..")
 

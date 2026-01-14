@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://b4vj0j526jl53"]
+
+[ext_resource type="Script" uid="uid://w71v1uv42grb" path="res://throwables/components/throwable_component.gd" id="1_66bo1"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u8j7e"]
+
+[node name="ThrowableComponent" type="Area2D"]
+script = ExtResource("1_66bo1")
+
+[node name="Texture" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_u8j7e")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

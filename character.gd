@@ -11,6 +11,8 @@ var _has_axe: bool = false
 var _knife_combo_step: int = 0
 var _axe_combo_step: int = 0
 
+const throwable_bow_scene: PackedScene = preload("res://throwables/character_bow/character_bow.tscn")
+
 @export_category("Variables")
 @export var _speed: float = 200.0
 @export var _jump_velocity: float = -300.0
@@ -74,7 +76,6 @@ func _vertical_movement(_delta: float) -> void:
 		_on_floor = false
 		velocity += get_gravity() * _delta
 
-	# Handle jump and douyble jump
 	if Input.is_action_just_pressed("jump") and (_jump_count < 2):
 		velocity.y = _jump_velocity
 		_jump_count += 1
@@ -132,6 +133,19 @@ func axe_attack() -> void:
 		return
 	set_physics_process(false)
 	_character_texture.action_animation(anim_name)
+
+func spawn_bow_projectile(_facing_left: bool) -> void:
+	var bow_instance := throwable_bow_scene.instantiate() as CharacterBow
+	if bow_instance == null:
+		return
+
+	var parent := get_parent()
+	if parent == null:
+		return
+	bow_instance.direction = Vector2(-1, 0) if _facing_left else Vector2(1, 0)
+	parent.call_deferred("add_child", bow_instance)
+	bow_instance.call_deferred("set_global_position", global_position + Vector2(0, 0))
+
 
 func _on_attack_combo_timeout() -> void:
 	_knife_combo_step = 0

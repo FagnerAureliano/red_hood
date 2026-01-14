@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://btpdeg12wctcv"]
+
+[ext_resource type="PackedScene" uid="uid://b4vj0j526jl53" path="res://throwables/components/throwable_component.tscn" id="1_jn08l"]
+[ext_resource type="Texture2D" uid="uid://dbrof7p5tpwej" path="res://throwables/character_bow/arrow.png" id="2_0f6tf"]
+[ext_resource type="Script" uid="uid://bmrobka68ijqx" path="res://throwables/character_bow/character_bow.gd" id="2_hdces"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hdces"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_0f6tf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mmy6m"]
+size = Vector2(10.75, 0.875)
+
+[node name="CharacterBow" instance=ExtResource("1_jn08l")]
+script = ExtResource("2_hdces")
+
+[node name="Texture" parent="." index="0"]
+scale = Vector2(0.02, 0.02)
+sprite_frames = SubResource("SpriteFrames_hdces")
+
+[node name="Collision" parent="." index="1"]
+position = Vector2(0, -0.5625)
+shape = SubResource("RectangleShape2D_mmy6m")

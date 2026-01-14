@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dbrof7p5tpwej"
-path="res://.godot/imported/arrow.png-7004ec8272e7fbbc542a3f1a9f3dd2c2.ctex"
+path="res://.godot/imported/arrow.png-787c9b9126b8282571131e78d5151bc2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://character/items/arrow.png"
-dest_files=["res://.godot/imported/arrow.png-7004ec8272e7fbbc542a3f1a9f3dd2c2.ctex"]
+source_file="res://throwables/character_bow/arrow.png"
+dest_files=["res://.godot/imported/arrow.png-787c9b9126b8282571131e78d5151bc2.ctex"]
 
 [params]
 

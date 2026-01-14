@@ -64,6 +64,9 @@ func _on_animation_finished() -> void:
 
 
 func _on_frame_changed() -> void:
+	if animation == "archer_attack":
+		if frame == 8:
+			_character.spawn_bow_projectile(flip_h)
 	if animation == "run":
 		if frame == 2 or frame == 8 or frame == 14 or frame == 20:
 			global.spawn_effect("res://visual_effects/dust_particles/run/run_effect.tscn",
