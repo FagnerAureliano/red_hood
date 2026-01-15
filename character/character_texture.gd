@@ -101,6 +101,10 @@ func _on_frame_changed() -> void:
 			_disable_attack_area()
 	
 	if animation.contains("axe"):
+		var vfx_frame := 6 if animation == "attack_3_with_axe" else 4
+		if frame == vfx_frame:
+			if _character != null and _character.has_method("spawn_pending_axe_effect"):
+				_character.call("spawn_pending_axe_effect")
 		if frame == 7 or frame == 8:
 			_enable_attack_area()
 		else:

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b8n1fgitnsige"
-path="res://.godot/imported/Layer_0002_7.png-ce724dbb6170975716dbdfa22acaa3b7.ctex"
+uid="uid://cts70b44lpyvq"
+path="res://.godot/imported/Layer_0004_Lights.png-dd7a875fd00d5a5f153ce1febf92822d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://background/Layer_0002_7.png"
-dest_files=["res://.godot/imported/Layer_0002_7.png-ce724dbb6170975716dbdfa22acaa3b7.ctex"]
+source_file="res://background/old/Layer_0004_Lights.png"
+dest_files=["res://.godot/imported/Layer_0004_Lights.png-dd7a875fd00d5a5f153ce1febf92822d.ctex"]
 
 [params]
 
