@@ -17,3 +17,5 @@ position = Vector2(-1, 0)
 [node name="Camera2D" type="Camera2D" parent="Character"]
 ignore_rotation = false
 position_smoothing_enabled = true
+
+[node name="Enemies" type="Node2D" parent="."]
