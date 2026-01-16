@@ -2,8 +2,24 @@ extends AnimatedSprite2D
 class_name EnemyTexture
 
 var _on_action: bool = false
+var _attack_area_x_abs: float = 0.0
 @export_category("Objects")
 @export var _enemy:BaseEnemy
+@export var _attack_area_collision: CollisionShape2D
+
+@export_category("Variables")
+@export var _last_attack_frame: int
+
+func _ready() -> void:
+	if _attack_area_collision != null:
+		_attack_area_x_abs = abs(_attack_area_collision.position.x)
+		if _attack_area_x_abs <= 0.0:
+			_attack_area_x_abs = 8.0
+
+func _set_facing_right(facing_right: bool) -> void:
+	flip_h = not facing_right
+	if _attack_area_collision != null:
+		_attack_area_collision.position.x = _attack_area_x_abs * (1.0 if facing_right else -1.0)
 
 func animate(_velocity: Vector2) -> void:
 	if _on_action:
@@ -11,7 +27,7 @@ func animate(_velocity: Vector2) -> void:
 
 	# Ajusta orientação: por padrão, sprite "olha" para a direita.
 	if _velocity.x != 0.0:
-		flip_h = _velocity.x < 0.0
+		_set_facing_right(_velocity.x > 0.0)
 
 	# Prioriza animações verticais quando houver movimento em Y.
 	if _velocity.y < 0.0:
@@ -29,6 +45,10 @@ func animate(_velocity: Vector2) -> void:
 	
 
 func action_animate(_action: String) -> void:
+	# Durante a ação (ex: "attack"), a velocidade pode ficar 0.
+	# Então usamos a direção do inimigo para orientar o sprite e a hitbox.
+	if is_instance_valid(_enemy):
+		_set_facing_right(_enemy.is_facing_right())
 	_enemy.set_physics_process(false)
 	_on_action = true
 	play(_action)
@@ -36,3 +56,13 @@ func action_animate(_action: String) -> void:
 func _on_animation_finished() -> void:
 	_on_action = false
 	_enemy.set_physics_process(true)
+
+
+func _on_frame_changed() -> void:
+	if animation == "attack":
+		if _attack_area_collision == null:
+			return
+		if frame == 2 or frame == 3:
+			_attack_area_collision.disabled = false
+		if frame == _last_attack_frame:
+			_attack_area_collision.disabled = true

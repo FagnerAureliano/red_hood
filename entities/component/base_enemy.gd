@@ -8,15 +8,27 @@ enum _types {
 }
 
 var _direction: Vector2 = Vector2.ZERO
+var _player_in_range: BaseCharacter = null
 var _on_floor: bool = false
 
 @export_category("Objects")
 @export var _enemy_texture: EnemyTexture
 
 @export_category("Variables")
-@export var _enemy_type:_types
+@export var _enemy_type: _types
 @export var _move_speed: float = 128.0
 @export var _floor_detection_ray: RayCast2D
+
+func get_facing_dir_x() -> float:
+	# Preferência: direção lógica do inimigo; fallback: velocidade atual.
+	if absf(_direction.x) > 0.001:
+		return signf(_direction.x)
+	if absf(velocity.x) > 0.001:
+		return signf(velocity.x)
+	return 1.0
+
+func is_facing_right() -> bool:
+	return get_facing_dir_x() > 0.0
 
 func _ready() -> void:
 	_direction = [Vector2(1, 0), Vector2(-1, 0)].pick_random()
@@ -27,6 +39,11 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	_vertical_movement(_delta)
+
+	if is_instance_valid(_player_in_range):
+		_attack()
+		return
+
 	match _enemy_type:
 		_types.STATIC:
 			_static(_delta)
@@ -55,6 +72,7 @@ func _static(_delta: float) -> void:
 func _chaser(_delta: float) -> void:
 	# Placeholder for chaser movement logic
 	pass
+
 func _wonderer(_delta: float) -> void:
 	if _floor_detection_ray == null:
 		return
@@ -72,6 +90,22 @@ func _wonderer(_delta: float) -> void:
 
 	if should_turn:
 		_direction.x *= -1.0
-		_floor_detection_ray.position.x = -_floor_detection_ray.position.x
+		_floor_detection_ray.position.x = - _floor_detection_ray.position.x
 
 	velocity.x = _direction.x * _move_speed
+
+func _attack() -> void:
+	pass
+
+func _on_detection_area_body_entered(_body: Node2D) -> void:
+	if _body is BaseCharacter:
+		print("Enemy detected a character!")
+		_player_in_range = _body
+	pass # Replace with function body.
+
+
+func _on_detection_area_body_exited(_body: Node2D) -> void:
+	if _body is BaseCharacter:
+		print("Enemy lost sight of a character!")
+		_player_in_range = null
+	pass # Replace with function body.

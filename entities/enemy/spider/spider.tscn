@@ -1,7 +1,8 @@
-[gd_scene load_steps=26 format=3 uid="uid://dg62074wfoewf"]
+[gd_scene load_steps=29 format=3 uid="uid://dg62074wfoewf"]
 
 [ext_resource type="PackedScene" uid="uid://c24fiqdoni2nv" path="res://entities/component/base_enemy.tscn" id="1_k0qc1"]
 [ext_resource type="Texture2D" uid="uid://dgtu58s2ruoxv" path="res://entities/enemy/spider/spider.png" id="2_1o7gw"]
+[ext_resource type="Script" uid="uid://f5r7qa8drpnv" path="res://entities/enemy/spider/spider.gd" id="2_u1kii"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1o7gw"]
 atlas = ExtResource("2_1o7gw")
@@ -105,7 +106,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wiugf")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack",
 "speed": 6.0
 }, {
@@ -147,7 +148,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_sdadm")
 }],
-"loop": true,
+"loop": false,
 "name": &"hit",
 "speed": 6.0
 }, {
@@ -226,30 +227,44 @@ animations = [{
 }],
 "loop": true,
 "name": &"run",
-"speed": 13.0
+"speed": 15.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1o7gw"]
 size = Vector2(22, 9)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u1kii"]
+size = Vector2(20, 9)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1o7gw"]
+radius = 21.0
+
 [node name="Spider" node_paths=PackedStringArray("_floor_detection_ray") instance=ExtResource("1_k0qc1")]
+script = ExtResource("2_u1kii")
 _enemy_type = 2
 _floor_detection_ray = NodePath("RayCast2D")
 
-[node name="Texture" parent="." index="0" node_paths=PackedStringArray("_enemy")]
+[node name="Texture" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_1o7gw")
-animation = &"land"
+animation = &"attack"
 autoplay = "idle"
-frame = 5
-frame_progress = 1.0
-_enemy = NodePath("..")
+_last_attack_frame = 4
 
 [node name="Collision" parent="." index="1"]
 position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_1o7gw")
 
 [node name="RayCast2D" parent="." index="2"]
+visible = false
 position = Vector2(15, 4)
 target_position = Vector2(0, 16)
+
+[node name="Collision" parent="AttackArea" index="0"]
+position = Vector2(11, 2)
+shape = SubResource("RectangleShape2D_u1kii")
+disabled = true
+
+[node name="Collision" parent="DetectionArea" index="0"]
+shape = SubResource("CircleShape2D_1o7gw")
 
 [connection signal="animation_finished" from="Texture" to="Texture" method="_on_animation_finished"]
