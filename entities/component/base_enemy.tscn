@@ -6,10 +6,11 @@
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lgj3r"]
 
-[node name="BaseEnemy" type="CharacterBody2D" node_paths=PackedStringArray("_enemy_texture")]
+[node name="BaseEnemy" type="CharacterBody2D" node_paths=PackedStringArray("_enemy_texture", "_knockback_timer")]
 position = Vector2(-3, 0)
 script = ExtResource("1_sbdll")
 _enemy_texture = NodePath("Texture")
+_knockback_timer = NodePath("KnockbackTimer")
 
 [node name="Texture" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("_enemy", "_attack_area_collision")]
 sprite_frames = SubResource("SpriteFrames_lgj3r")
@@ -30,7 +31,12 @@ script = ExtResource("3_6cs7w")
 
 [node name="Collision" type="CollisionShape2D" parent="DetectionArea"]
 
+[node name="KnockbackTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
 [connection signal="frame_changed" from="Texture" to="Texture" method="_on_frame_changed"]
 [connection signal="body_entered" from="AttackArea" to="AttackArea" method="_on_body_entered"]
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]
+[connection signal="timeout" from="KnockbackTimer" to="." method="_on_knockback_timer_timeout"]

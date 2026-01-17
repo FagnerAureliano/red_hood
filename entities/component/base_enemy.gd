@@ -10,14 +10,21 @@ enum _types {
 var _direction: Vector2 = Vector2.ZERO
 var _player_in_range: BaseCharacter = null
 var _on_floor: bool = false
+var _is_alive: bool = true
+var __on_knockback: bool = false
+var _lock_facing: bool = false
 
 @export_category("Objects")
 @export var _enemy_texture: EnemyTexture
+@export var _knockback_timer: Timer
 
 @export_category("Variables")
 @export var _enemy_type: _types
 @export var _move_speed: float = 128.0
+@export var _knockback_force: float = 140.0
+@export var _knockback_deceleration: float = 1400.0
 @export var _floor_detection_ray: RayCast2D
+@export var _enemy_health: int = 40
 
 func get_facing_dir_x() -> float:
 	# Preferência: direção lógica do inimigo; fallback: velocidade atual.
@@ -30,6 +37,9 @@ func get_facing_dir_x() -> float:
 func is_facing_right() -> bool:
 	return get_facing_dir_x() > 0.0
 
+func is_facing_locked() -> bool:
+	return _lock_facing
+
 func _ready() -> void:
 	_direction = [Vector2(1, 0), Vector2(-1, 0)].pick_random()
 	if _floor_detection_ray != null:
@@ -39,6 +49,16 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	_vertical_movement(_delta)
+	if not _is_alive:
+		move_and_slide()
+		return
+
+	if __on_knockback:
+		# Freia o X durante o knockback pra não arremessar longe demais.
+		velocity.x = move_toward(velocity.x, 0.0, _knockback_deceleration * _delta)
+		move_and_slide()
+		_enemy_texture.animate(velocity)
+		return
 
 	if is_instance_valid(_player_in_range):
 		_attack()
@@ -58,6 +78,9 @@ func _physics_process(_delta: float) -> void:
 
 func _vertical_movement(_delta: float) -> void:
 	if is_on_floor():
+		if not _is_alive:
+			velocity = Vector2.ZERO
+			return
 		if _on_floor == false:
 			_enemy_texture.action_animate("land")
 			_on_floor = true
@@ -97,15 +120,52 @@ func _wonderer(_delta: float) -> void:
 func _attack() -> void:
 	pass
 
+func update_health(_damage: int, _entity) -> void:
+	if not _is_alive:
+		return
+	_enemy_health -= _damage
+	if _enemy_health <= 0:
+		_kill()
+		return
+
+	# Enquanto o player estiver perto, não deixe o knockback virar o inimigo.
+	_lock_facing = true
+
+	# Animação de hit deve tocar junto com o knockback (sem travar física).
+	_enemy_texture.action_animate("hit", false)
+	_knockback(_entity)
+	
+func _knockback(_entity) -> void:
+	var _knockback_direction: Vector2 = _entity.global_position.direction_to(global_position)
+	velocity = Vector2(
+		_knockback_direction.x * _knockback_force,
+		-_knockback_force * 0.6
+	)
+	if _knockback_timer != null:
+		_knockback_timer.start()
+	__on_knockback = true
+
+func _kill() -> void:
+	_enemy_texture.action_animate("dead_hit")
+	__on_knockback = false
+	if _knockback_timer != null:
+		_knockback_timer.stop()
+	velocity = Vector2.ZERO
+	_is_alive = false
+
 func _on_detection_area_body_entered(_body: Node2D) -> void:
 	if _body is BaseCharacter:
 		print("Enemy detected a character!")
 		_player_in_range = _body
-	pass # Replace with function body.
+
 
 
 func _on_detection_area_body_exited(_body: Node2D) -> void:
 	if _body is BaseCharacter:
 		print("Enemy lost sight of a character!")
 		_player_in_range = null
-	pass # Replace with function body.
+		_lock_facing = false
+
+
+func _on_knockback_timer_timeout() -> void:
+	__on_knockback = false

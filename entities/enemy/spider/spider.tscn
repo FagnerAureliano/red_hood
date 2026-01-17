@@ -24,6 +24,10 @@ region = Rect2(102, 64, 33, 32)
 atlas = ExtResource("2_1o7gw")
 region = Rect2(135, 64, 33, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_sdadm"]
+atlas = ExtResource("2_1o7gw")
+region = Rect2(36, 96, 33, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_odj30"]
 atlas = ExtResource("2_1o7gw")
 region = Rect2(0, 129, 33, 32)
@@ -47,10 +51,6 @@ region = Rect2(132, 129, 33, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_8opeq"]
 atlas = ExtResource("2_1o7gw")
 region = Rect2(3, 96, 33, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sdadm"]
-atlas = ExtResource("2_1o7gw")
-region = Rect2(36, 96, 33, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u1kii"]
 atlas = ExtResource("2_1o7gw")
@@ -112,6 +112,9 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_sdadm")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_odj30")
 }, {
 "duration": 1.0,
@@ -126,7 +129,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5k7gs")
 }],
-"loop": true,
+"loop": false,
 "name": &"dead_hit",
 "speed": 5.0
 }, {
@@ -246,8 +249,10 @@ _floor_detection_ray = NodePath("RayCast2D")
 
 [node name="Texture" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_1o7gw")
-animation = &"attack"
+animation = &"dead_hit"
 autoplay = "idle"
+frame = 5
+frame_progress = 1.0
 _last_attack_frame = 4
 
 [node name="Collision" parent="." index="1"]
@@ -266,5 +271,8 @@ disabled = true
 
 [node name="Collision" parent="DetectionArea" index="0"]
 shape = SubResource("CircleShape2D_1o7gw")
+
+[node name="KnockbackTimer" parent="." index="5"]
+wait_time = 0.6
 
 [connection signal="animation_finished" from="Texture" to="Texture" method="_on_animation_finished"]

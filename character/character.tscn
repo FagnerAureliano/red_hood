@@ -1,4 +1,4 @@
-[gd_scene load_steps=147 format=3 uid="uid://724f011om128"]
+[gd_scene load_steps=148 format=3 uid="uid://724f011om128"]
 
 [ext_resource type="Texture2D" uid="uid://be21md7ugafvh" path="res://character/movements/idle sheet-Sheet.png" id="1_glpr6"]
 [ext_resource type="Script" uid="uid://eptrb34tkv44" path="res://character.gd" id="1_pjt0s"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://bt4oyjcxg7vx5" path="res://character/character_texture.gd" id="3_ugqs2"]
 [ext_resource type="Texture2D" uid="uid://5tvenbkvlkm" path="res://character/movements/itch run-Sheet sheet.png" id="4_0rvpn"]
 [ext_resource type="Texture2D" uid="uid://boojtr7j45mmv" path="res://character/movements/itch light atk sheet-Sheet.png" id="5_tgjim"]
+[ext_resource type="Script" uid="uid://co5xl76er64ml" path="res://character/character_attack_area.gd" id="8_wy5t8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4d2y3"]
 atlas = ExtResource("2_o6jyn")
@@ -1059,12 +1060,13 @@ wait_time = 0.64
 one_shot = true
 
 [node name="AttackArea" type="Area2D" parent="."]
-visible = false
+script = ExtResource("8_wy5t8")
 
 [node name="Collision" type="CollisionShape2D" parent="AttackArea"]
-position = Vector2(22, 0)
+position = Vector2(22, 2)
 shape = SubResource("CircleShape2D_tgjim")
 disabled = true
 
 [connection signal="frame_changed" from="Texture" to="Texture" method="_on_frame_changed"]
 [connection signal="timeout" from="AttackCombo" to="." method="_on_attack_combo_timeout"]
+[connection signal="body_entered" from="AttackArea" to="AttackArea" method="_on_body_entered"]

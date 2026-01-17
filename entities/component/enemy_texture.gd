@@ -2,6 +2,7 @@ extends AnimatedSprite2D
 class_name EnemyTexture
 
 var _on_action: bool = false
+var _enemy_frozen_by_action: bool = false
 var _attack_area_x_abs: float = 0.0
 @export_category("Objects")
 @export var _enemy:BaseEnemy
@@ -26,7 +27,10 @@ func animate(_velocity: Vector2) -> void:
 		return
 
 	# Ajusta orientação: por padrão, sprite "olha" para a direita.
-	if _velocity.x != 0.0:
+	# Se o inimigo estiver com facing travado, não vire por causa do knockback.
+	if is_instance_valid(_enemy) and _enemy.is_facing_locked():
+		_set_facing_right(_enemy.is_facing_right())
+	elif _velocity.x != 0.0:
 		_set_facing_right(_velocity.x > 0.0)
 
 	# Prioriza animações verticais quando houver movimento em Y.
@@ -44,18 +48,22 @@ func animate(_velocity: Vector2) -> void:
 	play("idle")
 	
 
-func action_animate(_action: String) -> void:
+func action_animate(_action: String, _freeze_enemy: bool = true) -> void:
 	# Durante a ação (ex: "attack"), a velocidade pode ficar 0.
 	# Então usamos a direção do inimigo para orientar o sprite e a hitbox.
 	if is_instance_valid(_enemy):
 		_set_facing_right(_enemy.is_facing_right())
-	_enemy.set_physics_process(false)
+		if _freeze_enemy:
+			_enemy.set_physics_process(false)
+			_enemy_frozen_by_action = true
 	_on_action = true
 	play(_action)
 
 func _on_animation_finished() -> void:
 	_on_action = false
-	_enemy.set_physics_process(true)
+	if _enemy_frozen_by_action and is_instance_valid(_enemy):
+		_enemy.set_physics_process(true)
+	_enemy_frozen_by_action = false
 
 
 func _on_frame_changed() -> void:
