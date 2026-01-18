@@ -16,6 +16,12 @@ var _pending_axe_vfx_step: int = 0
 var _pending_axe_vfx_offset: Vector2 = Vector2.ZERO
 var _pending_axe_vfx_flip_h: bool = false
 
+var _camera: Camera2D = null
+var _camera_base_offset: Vector2 = Vector2.ZERO
+var _shake_time_left: float = 0.0
+var _shake_strength: float = 0.0
+var _rng := RandomNumberGenerator.new()
+
 const throwable_bow_scene: PackedScene = preload("res://throwables/character_bow/character_bow.tscn")
 
 @export_category("Variables")
@@ -31,8 +37,42 @@ func _ready() -> void:
 	if _attack_combo_timer != null:
 		_combo_wait_time_base = _attack_combo_timer.wait_time
 
+	_rng.randomize()
+	_camera = get_node_or_null("Camera2D") as Camera2D
+	if _camera != null:
+		_camera_base_offset = _camera.offset
+
 	# Prevent initial camera drift when smoothing is enabled.
 	call_deferred("_snap_camera_on_start")
+
+
+func _process(delta: float) -> void:
+	if _shake_time_left <= 0.0:
+		return
+
+	if _camera == null:
+		_camera = get_node_or_null("Camera2D") as Camera2D
+		if _camera != null:
+			_camera_base_offset = _camera.offset
+		else:
+			_shake_time_left = 0.0
+			_shake_strength = 0.0
+			return
+
+	_shake_time_left -= delta
+	_camera.offset = _camera_base_offset + Vector2(
+		_rng.randf_range(-_shake_strength, _shake_strength),
+		_rng.randf_range(-_shake_strength, _shake_strength)
+	)
+
+	if _shake_time_left <= 0.0:
+		_camera.offset = _camera_base_offset
+		_shake_strength = 0.0
+
+
+func camera_shake(strength: float = 3.5, duration: float = 0.07) -> void:
+	_shake_strength = maxf(_shake_strength, strength)
+	_shake_time_left = maxf(_shake_time_left, duration)
 
 
 func _snap_camera_on_start() -> void:

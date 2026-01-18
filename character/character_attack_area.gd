@@ -6,5 +6,8 @@ class_name CharacterAttackArea
 func _on_body_entered(_body: Node2D) -> void:
 	if _body is BaseEnemy:
 		_body.update_health(_attack_damage, get_parent())  # Example damage value
+		var attacker := get_parent()
+		if attacker != null and attacker.has_method("camera_shake"):
+			attacker.camera_shake()
 		print("Character attack area hit an enemy!")
 	pass # Replace with function body.

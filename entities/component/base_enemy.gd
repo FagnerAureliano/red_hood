@@ -123,6 +123,7 @@ func _attack() -> void:
 func update_health(_damage: int, _entity) -> void:
 	if not _is_alive:
 		return
+	global.spawn_damage_popup(_damage, global_position)
 	_enemy_health -= _damage
 	if _enemy_health <= 0:
 		_kill()
