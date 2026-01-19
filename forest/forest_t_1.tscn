@@ -17,9 +17,8 @@ z_index = -1
 position = Vector2(99, 321)
 
 [node name="Camera2D" parent="Character" index="4"]
-position = Vector2(-4, -3)
-limit_bottom = 360
-limit_smoothed = true
+position = Vector2(0, -120)
+anchor_mode = 1
 
 [node name="CollectableBow" parent="." index="3" instance=ExtResource("2_l7fun")]
 position = Vector2(303, 285)

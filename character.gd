@@ -18,9 +18,15 @@ var _pending_axe_vfx_flip_h: bool = false
 
 var _camera: Camera2D = null
 var _camera_base_offset: Vector2 = Vector2.ZERO
+var _camera_base_offset_abs_x: float = 0.0
+var _camera_face_offset_x: float = 0.0
 var _shake_time_left: float = 0.0
 var _shake_strength: float = 0.0
 var _rng := RandomNumberGenerator.new()
+
+@export_category("Camera")
+@export var _camera_face_lerp_speed: float = 3.0
+@export var _camera_offset_x: float = 100.0
 
 const throwable_bow_scene: PackedScene = preload("res://throwables/character_bow/character_bow.tscn")
 
@@ -41,12 +47,16 @@ func _ready() -> void:
 	_camera = get_node_or_null("Camera2D") as Camera2D
 	if _camera != null:
 		_camera_base_offset = _camera.offset
+		_camera_base_offset_abs_x = absf(_camera_base_offset.x)
+		_camera_face_offset_x = _camera_base_offset.x
 
 	# Prevent initial camera drift when smoothing is enabled.
 	call_deferred("_snap_camera_on_start")
 
 
 func _process(delta: float) -> void:
+	_update_camera_facing(delta)
+
 	if _shake_time_left <= 0.0:
 		return
 
@@ -54,25 +64,43 @@ func _process(delta: float) -> void:
 		_camera = get_node_or_null("Camera2D") as Camera2D
 		if _camera != null:
 			_camera_base_offset = _camera.offset
+			_camera_base_offset_abs_x = absf(_camera_base_offset.x)
 		else:
 			_shake_time_left = 0.0
 			_shake_strength = 0.0
 			return
 
 	_shake_time_left -= delta
-	_camera.offset = _camera_base_offset + Vector2(
+	_camera.offset = Vector2(_camera_face_offset_x, _camera_base_offset.y) + Vector2(
 		_rng.randf_range(-_shake_strength, _shake_strength),
 		_rng.randf_range(-_shake_strength, _shake_strength)
 	)
 
 	if _shake_time_left <= 0.0:
-		_camera.offset = _camera_base_offset
+		_camera.offset = Vector2(_camera_face_offset_x, _camera_base_offset.y)
 		_shake_strength = 0.0
 
 
 func camera_shake(strength: float = 3.5, duration: float = 0.07) -> void:
 	_shake_strength = maxf(_shake_strength, strength)
 	_shake_time_left = maxf(_shake_time_left, duration)
+
+
+func _update_camera_facing(delta: float) -> void:
+	if _camera == null:
+		return
+
+	# Use visual facing (flip_h) when available; fallback to velocity.
+	var facing_right := true
+	if _character_texture != null:
+		facing_right = not _character_texture.flip_h
+	elif absf(velocity.x) > 0.001:
+		facing_right = velocity.x > 0.0
+
+	var target_x := _camera_offset_x if facing_right else -_camera_offset_x
+	_camera_face_offset_x = lerpf(_camera_face_offset_x, target_x, clampf(_camera_face_lerp_speed * delta, 0.0, 1.0))
+	if _shake_time_left <= 0.0:
+		_camera.offset = Vector2(_camera_face_offset_x, _camera_base_offset.y)
 
 
 func _snap_camera_on_start() -> void:
