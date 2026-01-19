@@ -1044,7 +1044,7 @@ _attack_combo_timer = NodePath("AttackCombo")
 
 [node name="Texture" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("_character", "_attack_area_colision")]
 sprite_frames = SubResource("SpriteFrames_kjduu")
-animation = &"archer_attack"
+animation = &"idle"
 autoplay = "idle"
 script = ExtResource("3_ugqs2")
 _character = NodePath("..")
