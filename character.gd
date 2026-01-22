@@ -27,12 +27,14 @@ var _rng := RandomNumberGenerator.new()
 @export_category("Camera")
 @export var _camera_face_lerp_speed: float = 3.0
 @export var _camera_offset_x: float = 100.0
+@export var _camera_smoothing_base: float = 8.0
+@export var _camera_smoothing_up: float = 4.0
 
 const throwable_bow_scene: PackedScene = preload("res://throwables/character_bow/character_bow.tscn")
 
 @export_category("Variables")
-@export var _speed: float = 200.0
-@export var _jump_velocity: float = -300.0
+@export var _speed: float = 150.0
+@export var _jump_velocity: float = -220.0
 @export_category("Objects")
 @export var _character_texture: CharacterTexture
 @export var _attack_combo_timer: Timer
@@ -56,6 +58,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	_update_camera_facing(delta)
+	_update_camera_smoothing(delta)
 
 	if _shake_time_left <= 0.0:
 		return
@@ -84,6 +87,19 @@ func _process(delta: float) -> void:
 func camera_shake(strength: float = 3.5, duration: float = 0.07) -> void:
 	_shake_strength = maxf(_shake_strength, strength)
 	_shake_time_left = maxf(_shake_time_left, duration)
+
+
+func _update_camera_smoothing(delta: float) -> void:
+	if _camera == null:
+		return
+	if not _camera.position_smoothing_enabled:
+		return
+
+	var target_speed: float = _camera_smoothing_base
+	if velocity.y < -50.0:
+		target_speed = _camera_smoothing_up
+
+	_camera.position_smoothing_speed = lerpf(_camera.position_smoothing_speed, target_speed, delta * 5.0)
 
 
 func _update_camera_facing(delta: float) -> void:
