@@ -26,12 +26,12 @@ func _ready() -> void:
 
 func _disable_attack_area() -> void:
 	if _attack_area_colision != null:
-		_attack_area_colision.disabled = true
+		_attack_area_colision.set_deferred("disabled", true)
 
 
 func _enable_attack_area() -> void:
 	if _attack_area_colision != null:
-		_attack_area_colision.disabled = false
+		_attack_area_colision.set_deferred("disabled", false)
 
 func animate(_velocity: Vector2) -> void:
 	_verify_direction(_velocity)

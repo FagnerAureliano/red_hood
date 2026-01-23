@@ -7,6 +7,7 @@ var _on_floor: bool = true
 var _has_bow: bool = false
 var _has_knife: bool = false
 var _has_axe: bool = false
+var _on_knockback: bool = false
 
 var _knife_combo_step: int = 0
 var _axe_combo_step: int = 0
@@ -23,6 +24,9 @@ var _camera_face_offset_x: float = 0.0
 var _shake_time_left: float = 0.0
 var _shake_strength: float = 0.0
 var _rng := RandomNumberGenerator.new()
+var _combo_wait_time_base: float = 0.0
+
+const throwable_bow_scene: PackedScene = preload("res://throwables/character_bow/character_bow.tscn")
 
 @export_category("Camera")
 @export var _camera_face_lerp_speed: float = 3.0
@@ -30,16 +34,16 @@ var _rng := RandomNumberGenerator.new()
 @export var _camera_smoothing_base: float = 8.0
 @export var _camera_smoothing_up: float = 4.0
 
-const throwable_bow_scene: PackedScene = preload("res://throwables/character_bow/character_bow.tscn")
-
 @export_category("Variables")
 @export var _speed: float = 150.0
-@export var _jump_velocity: float = -220.0
+@export var _jump_velocity: float = -280.0
+@export var _character_health: int = 10
+@export var _knockback_speed: float = 10.0
+
 @export_category("Objects")
 @export var _character_texture: CharacterTexture
 @export var _attack_combo_timer: Timer
 
-var _combo_wait_time_base: float = 0.0
 
 func _ready() -> void:
 	if _attack_combo_timer != null:
@@ -188,9 +192,16 @@ func _vertical_movement(_delta: float) -> void:
 		_jump_count += 1
 		global.spawn_effect("res://visual_effects/dust_particles/jump/jump_effect.tscn",
 		Vector2(0, 11), global_position, _character_texture.flip_h)
+	
+	if Input.is_action_just_released("jump") and velocity.y < 0:
+		velocity.y *= 0.5
 
 
 func _horizontal_movement() -> void:
+	if _on_knockback:
+		velocity.x = lerpf(velocity.x, 0.0, 0.1)
+		return
+
 	var _direction := Input.get_axis("move_left", "move_right")
 	if _direction:
 		velocity.x = _direction * _speed
@@ -286,7 +297,28 @@ func spawn_bow_projectile(_facing_left: bool) -> void:
 	parent.call_deferred("add_child", bow_instance)
 	bow_instance.call_deferred("set_global_position", global_position + Vector2(0, 0))
 
+func update_health(_value: int, _entity) -> void:
+	_knockback(_entity)
+	_character_health -= _value
+	if _character_health <= 0:
+		_character_health = 0
+		_character_texture.action_animation("hit")
+		set_physics_process(false)
+		return
+	_character_texture.action_animation("hit")
+
+func _knockback(_entity) -> void:
+	var _knockback_direction: Vector2 = _entity.global_position.direction_to(global_position)
+	velocity = Vector2(
+		_knockback_direction.x * _knockback_speed,
+		-_knockback_speed * 0.6
+	)
+	_on_knockback = true
 
 func _on_attack_combo_timeout() -> void:
 	_knife_combo_step = 0
 	_axe_combo_step = 0
+
+func _on_action_finished(_action_name: String) -> void:
+	if _action_name == "hit":
+		_on_knockback = false
