@@ -302,8 +302,9 @@ func update_health(_value: int, _entity) -> void:
 	_character_health -= _value
 	if _character_health <= 0:
 		_character_health = 0
-		_character_texture.action_animation("hit")
+		_character_texture.action_animation("dead_hit")
 		set_physics_process(false)
+
 		return
 	_character_texture.action_animation("hit")
 
@@ -322,3 +323,7 @@ func _on_attack_combo_timeout() -> void:
 func _on_action_finished(_action_name: String) -> void:
 	if _action_name == "hit":
 		_on_knockback = false
+
+func is_dead() -> bool:
+	return _character_health <= 0
+

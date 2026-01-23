@@ -61,8 +61,11 @@ func _physics_process(_delta: float) -> void:
 		return
 
 	if is_instance_valid(_player_in_range):
-		_attack()
-		return
+		if _player_in_range.has_method("is_dead") and _player_in_range.is_dead():
+			_player_in_range = null
+		else:
+			_attack()
+			return
 
 	match _enemy_type:
 		_types.STATIC:
@@ -156,6 +159,9 @@ func _kill() -> void:
 
 func _on_detection_area_body_entered(_body: Node2D) -> void:
 	if _body is BaseCharacter:
+		if _body.has_method("is_dead") and _body.is_dead():
+			return
+			
 		print("Enemy detected a character!")
 		_player_in_range = _body
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=177 format=3 uid="uid://724f011om128"]
+[gd_scene load_steps=186 format=3 uid="uid://724f011om128"]
 
 [ext_resource type="Texture2D" uid="uid://be21md7ugafvh" path="res://character/movements/idle sheet-Sheet.png" id="1_glpr6"]
 [ext_resource type="Script" uid="uid://eptrb34tkv44" path="res://character.gd" id="1_pjt0s"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://csel4ve0q6l8q" path="res://character/movements/itch jump sheet-Sheet.png" id="3_hx151"]
 [ext_resource type="Script" uid="uid://bt4oyjcxg7vx5" path="res://character/character_texture.gd" id="3_ugqs2"]
 [ext_resource type="Texture2D" uid="uid://5tvenbkvlkm" path="res://character/movements/itch run-Sheet sheet.png" id="4_0rvpn"]
+[ext_resource type="Texture2D" uid="uid://cgwiuytl0qeqe" path="res://character/movements/dead hit.png" id="4_b4qc5"]
 [ext_resource type="Texture2D" uid="uid://boojtr7j45mmv" path="res://character/movements/itch light atk sheet-Sheet.png" id="5_tgjim"]
 [ext_resource type="Texture2D" uid="uid://dpd7o06aqefsm" path="res://character/movements/run turnaround-Sheet.png" id="7_8brn5"]
 [ext_resource type="Texture2D" uid="uid://exwvv6tpk035" path="res://character/movements/run turnaround_left_Sheet.png" id="8_b4qc5"]
@@ -312,6 +313,38 @@ region = Rect2(1840, 0, 65, 80)
 [sub_resource type="AtlasTexture" id="AtlasTexture_evt3s"]
 atlas = ExtResource("5_tgjim")
 region = Rect2(1920, 0, 65, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_11qjq"]
+atlas = ExtResource("4_b4qc5")
+region = Rect2(826, 0, 116, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1h0kb"]
+atlas = ExtResource("4_b4qc5")
+region = Rect2(709, 0, 116, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hmn34"]
+atlas = ExtResource("4_b4qc5")
+region = Rect2(592, 0, 116, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0fi7o"]
+atlas = ExtResource("4_b4qc5")
+region = Rect2(475, 0, 116, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l016i"]
+atlas = ExtResource("4_b4qc5")
+region = Rect2(358, 0, 116, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ncg0a"]
+atlas = ExtResource("4_b4qc5")
+region = Rect2(241, 0, 116, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_epeve"]
+atlas = ExtResource("4_b4qc5")
+region = Rect2(124, 0, 116, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7v8r5"]
+atlas = ExtResource("4_b4qc5")
+region = Rect2(7, 0, 116, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ovicm"]
 atlas = ExtResource("2_o6jyn")
@@ -933,6 +966,35 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_11qjq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1h0kb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hmn34")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0fi7o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l016i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ncg0a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_epeve")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7v8r5")
+}],
+"loop": false,
+"name": &"dead_hit",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_ovicm")
 }, {
 "duration": 1.0,
@@ -1249,16 +1311,15 @@ _attack_combo_timer = NodePath("AttackCombo")
 [node name="Texture" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("_character", "_attack_area_colision")]
 position = Vector2(4, 1)
 sprite_frames = SubResource("SpriteFrames_kjduu")
-animation = &"land"
+animation = &"dead_hit"
 autoplay = "idle"
-frame = 3
+frame = 7
 frame_progress = 1.0
 script = ExtResource("3_ugqs2")
 _character = NodePath("..")
 _attack_area_colision = NodePath("../AttackArea/Collision")
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(-1, 5)
 shape = SubResource("RectangleShape2D_3d8aq")
 
