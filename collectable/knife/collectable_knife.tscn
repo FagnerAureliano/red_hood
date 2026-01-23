@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3 uid="uid://bs1ebcii77o5r"]
 
-[ext_resource type="PackedScene" uid="uid://cs3hg7fulrtmd" path="res://character/collectable/collectable_component.tscn" id="1_haxkk"]
-[ext_resource type="Texture2D" uid="uid://c0bob8yd0y6ii" path="res://character/collectable/knife/knife.png" id="2_pqv3u"]
-[ext_resource type="Script" path="res://character/collectable/knife/collectable_knife.gd" id="3_knife_script"]
+[ext_resource type="PackedScene" uid="uid://cs3hg7fulrtmd" path="res://collectable/collectable_component.tscn" id="1_haxkk"]
+[ext_resource type="Texture2D" uid="uid://c0bob8yd0y6ii" path="res://collectable/knife/knife.png" id="2_pqv3u"]
+[ext_resource type="Script" uid="uid://cksuxi0rilro1" path="res://collectable/knife/collectable_knife.gd" id="3_knife_script"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jw55m"]
 atlas = ExtResource("2_pqv3u")

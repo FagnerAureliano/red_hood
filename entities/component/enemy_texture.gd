@@ -67,6 +67,15 @@ func _on_animation_finished() -> void:
 
 
 func _on_frame_changed() -> void:
+	if animation == "run":
+		if frame == 2 or frame == 8 or frame == 14 or frame == 20:
+			global.spawn_effect(
+				"res://visual_effects/dust_particles/run/run_effect.tscn",
+				Vector2(7, -4),
+				global_position,
+				flip_h
+			)
+
 	if animation == "attack":
 		if _attack_area_collision == null:
 			return

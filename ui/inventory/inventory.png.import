@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4lihgpussnbd"
-path="res://.godot/imported/bow.png-2a80993b041b25f4d8c2e08f7f4f933a.ctex"
+uid="uid://cqyvqswdeffjx"
+path="res://.godot/imported/inventory.png-dae1d0697c87e9028dab64cea46638fb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://character/collectable/bow/bow.png"
-dest_files=["res://.godot/imported/bow.png-2a80993b041b25f4d8c2e08f7f4f933a.ctex"]
+source_file="res://ui/inventory/inventory.png"
+dest_files=["res://.godot/imported/inventory.png-dae1d0697c87e9028dab64cea46638fb.ctex"]
 
 [params]
 

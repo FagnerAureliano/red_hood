@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qhvc17khfdxj"
-path="res://.godot/imported/axe.png-db678978c02deb36c9baf138957ef182.ctex"
+uid="uid://c87ysakd4gawt"
+path="res://.godot/imported/fantasy.png-597011d49ed8b4f3193b13ea8172ccc8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://character/collectable/axe/axe.png"
-dest_files=["res://.godot/imported/axe.png-db678978c02deb36c9baf138957ef182.ctex"]
+source_file="res://ui/assets/fantasy.png"
+dest_files=["res://.godot/imported/fantasy.png-597011d49ed8b4f3193b13ea8172ccc8.ctex"]
 
 [params]
 

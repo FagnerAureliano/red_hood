@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://blj4cpl0ex5k3"
-path="res://.godot/imported/boww.png-300d10161abccbac1708187cbe83630e.ctex"
+uid="uid://cdta5ij8y68jj"
+path="res://.godot/imported/potion_hp.png-f31bc3562beb205d95b2c947bbb26191.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://character/collectable/bow/boww.png"
-dest_files=["res://.godot/imported/boww.png-300d10161abccbac1708187cbe83630e.ctex"]
+source_file="res://collectables_by_drop/potion_hp.png"
+dest_files=["res://.godot/imported/potion_hp.png-f31bc3562beb205d95b2c947bbb26191.ctex"]
 
 [params]
 
