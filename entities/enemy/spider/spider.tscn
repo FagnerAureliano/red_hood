@@ -1,8 +1,10 @@
-[gd_scene load_steps=29 format=3 uid="uid://dg62074wfoewf"]
+[gd_scene load_steps=30 format=3 uid="uid://dg62074wfoewf"]
 
 [ext_resource type="PackedScene" uid="uid://c24fiqdoni2nv" path="res://entities/component/base_enemy.tscn" id="1_k0qc1"]
 [ext_resource type="Texture2D" uid="uid://dgtu58s2ruoxv" path="res://entities/enemy/spider/spider.png" id="2_1o7gw"]
 [ext_resource type="Script" uid="uid://f5r7qa8drpnv" path="res://entities/enemy/spider/spider.gd" id="2_u1kii"]
+
+[sub_resource type="PackedScene" id="PackedScene_u1kii"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1o7gw"]
 atlas = ExtResource("2_1o7gw")
@@ -244,6 +246,8 @@ radius = 21.0
 
 [node name="Spider" node_paths=PackedStringArray("_floor_detection_ray") instance=ExtResource("1_k0qc1")]
 script = ExtResource("2_u1kii")
+_spider_health = 10
+_drop_scene = SubResource("PackedScene_u1kii")
 _enemy_type = 2
 _floor_detection_ray = NodePath("RayCast2D")
 

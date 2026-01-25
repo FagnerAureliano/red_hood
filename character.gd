@@ -316,6 +316,12 @@ func _knockback(_entity) -> void:
 	)
 	_on_knockback = true
 
+func collect_item(_items: Array) -> void:
+	print("Collecting items: %s" % _items)
+	for item_id in _items:
+		# Implement item collection logic here.
+		pass
+
 func _on_attack_combo_timeout() -> void:
 	_knife_combo_step = 0
 	_axe_combo_step = 0

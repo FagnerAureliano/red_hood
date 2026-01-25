@@ -14,6 +14,8 @@ var _is_alive: bool = true
 var __on_knockback: bool = false
 var _lock_facing: bool = false
 
+var _drop_items_list: Dictionary = {}
+
 @export_category("Objects")
 @export var _enemy_texture: EnemyTexture
 @export var _knockback_timer: Timer
@@ -42,10 +44,15 @@ func is_facing_locked() -> bool:
 
 func _ready() -> void:
 	_direction = [Vector2(1, 0), Vector2(-1, 0)].pick_random()
+	_drop_items_list = _get_drop_items()
 	if _floor_detection_ray != null:
 		_floor_detection_ray.enabled = true
 		_floor_detection_ray.exclude_parent = true
 		_floor_detection_ray.position.x = abs(_floor_detection_ray.position.x) * signf(_direction.x)
+
+func _get_drop_items() -> Dictionary:
+	# Placeholder for drop items logic
+	return {}
 
 func _physics_process(_delta: float) -> void:
 	_vertical_movement(_delta)
@@ -149,7 +156,7 @@ func _knockback(_entity) -> void:
 	var _knockback_direction: Vector2 = _entity.global_position.direction_to(global_position)
 	velocity = Vector2(
 		_knockback_direction.x * _knockback_force,
-		-_knockback_force * 0.6
+		- _knockback_force * 0.6
 	)
 	if _knockback_timer != null:
 		_knockback_timer.start()
@@ -162,9 +169,15 @@ func _kill() -> void:
 		_knockback_timer.stop()
 	velocity = Vector2.ZERO
 	_is_alive = false
-	_drop_items()
 
-func _drop_items() -> void:
+	for _item in _drop_items_list:
+		#probality dados do item: { "path": "res://collectables_by_drop/spider/bow_drop.png", "type": "resource", "value": 5, "spawn_chance": 1.0 }
+		var chance = _drop_items_list[_item].get("spawn_chance", 0.0)
+		if randf() <= chance:
+			_drop_item(_item, _drop_items_list[_item])
+
+
+func _drop_item(_item_name: String, _item_data: Dictionary) -> void:
 	pass
 
 func _on_detection_area_body_entered(_body: Node2D) -> void:
@@ -174,7 +187,6 @@ func _on_detection_area_body_entered(_body: Node2D) -> void:
 			
 		print("Enemy detected a character!")
 		_player_in_range = _body
-
 
 
 func _on_detection_area_body_exited(_body: Node2D) -> void:

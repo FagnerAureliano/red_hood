@@ -16,6 +16,9 @@ class_name CometDrop
 @export var max_kick_impulse: float = 140.0
 @export var kick_up_impulse: float = -140.0
 
+@export_category("Loot")
+@export var loot_table: Array[String] = []
+
 var _trail_points: PackedVector2Array = PackedVector2Array()
 var _rng := RandomNumberGenerator.new()
 
@@ -62,6 +65,28 @@ func kick(impulse: Vector2 = Vector2.ZERO) -> void:
 	if impulse == Vector2.ZERO:
 		var side := _rng.randf_range(min_kick_impulse, max_kick_impulse)
 		if _rng.randf() < 0.5:
-			side = -side
+			side = - side
 		impulse = Vector2(side, kick_up_impulse)
 	apply_impulse(impulse)
+
+
+func _on_body_entered(body: Node) -> void:
+	if not (body is BaseCharacter):
+		return
+	if loot_table.is_empty():
+		queue_free()
+		return
+
+	var item_index := _rng.randi_range(0, loot_table.size() - 1)
+	var item_id := loot_table[item_index]
+	if body.has_method("add_item"):
+		body.call("add_item", item_id)
+	queue_free()
+
+
+func _on_collectable_area_body_entered(_body) -> void:
+	if _body is BaseCharacter:
+		global.spawn_effect("res://visual_effects/dust_particles/jump/jump_effect.tscn",
+        Vector2.ZERO, global_position, false)
+		_body.collect_item(loot_table)
+		queue_free()

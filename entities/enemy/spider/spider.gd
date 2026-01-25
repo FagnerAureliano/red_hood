@@ -4,7 +4,7 @@ class_name Spider
 const comet_drop_scene: PackedScene = preload("res://collectables_by_drop/comet_drop/comet_drop.tscn")
 
 var _drop_rng := RandomNumberGenerator.new()
-@export var _spider_health: int = 40
+@export var _spider_health: int = 10
 
 
 func _attack() -> void:
@@ -18,8 +18,30 @@ func _ready() -> void:
 	_enemy_health = _spider_health
 	_drop_rng.randomize()
 
+func _get_drop_items() -> Dictionary:
+	return {
+		"spider_web": {
+			"path": "res://collectables_by_drop/spider/bow_drop.png",
+			"type": "resource",
+			"value": 5,
+			"spawn_chance": 1.0
+		},
+		"bow_drop": {
+			"path": "res://collectables_by_drop/spider/bow_drop.png",
+			"type": "equipment",
+			"value": 1,
+			"spawn_chance": 0.3,
+			"attributes": {
+				"bow": true,
+				"damage": 10
+			}
+		}
 
-func _drop_items() -> void:
+	}
+func _drop_item(_item_name: String, _item_data: Dictionary) -> void:
+	print("Dropping item: %s" % _item_name)
+	print("Item data: %s" % _item_data)
+	 
 	var drop := comet_drop_scene.instantiate() as CometDrop
 	if drop == null:
 		return
