@@ -1,5 +1,5 @@
 extends RigidBody2D
-class_name CometDrop
+class_name BaseCollectableItem
 
 @export_category("Visual")
 @export var trail_length: int = 20

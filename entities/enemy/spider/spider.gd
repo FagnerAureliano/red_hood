@@ -1,7 +1,7 @@
 extends BaseEnemy
 class_name Spider
 
-const comet_drop_scene: PackedScene = preload("res://collectables_by_drop/comet_drop/comet_drop.tscn")
+const collectable_item_scene: PackedScene = preload("res://collectables_by_drop/collectable_item/base_collectable_item.tscn")
 
 var _drop_rng := RandomNumberGenerator.new()
 @export var _spider_health: int = 10
@@ -42,7 +42,7 @@ func _drop_item(_item_name: String, _item_data: Dictionary) -> void:
 	print("Dropping item: %s" % _item_name)
 	print("Item data: %s" % _item_data)
 	 
-	var drop := comet_drop_scene.instantiate() as CometDrop
+	var drop := collectable_item_scene.instantiate() as BaseCollectableItem
 	if drop == null:
 		return
 	var parent := get_parent()

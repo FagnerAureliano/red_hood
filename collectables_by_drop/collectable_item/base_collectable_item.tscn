@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://sicpkoojxtda"]
 
-[ext_resource type="Script" uid="uid://ich2ql2coh6m" path="res://collectables_by_drop/comet_drop/comet_drop.gd" id="1_k7jgi"]
+[ext_resource type="Script" path="res://collectables_by_drop/collectable_item/base_collectable_item.gd" id="1_k7jgi"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1w4er"]
 friction = 0.3
@@ -22,7 +22,7 @@ color = Color(1, 1, 1, 0.6)
 [sub_resource type="CircleShape2D" id="CircleShape2D_xkpym"]
 radius = 5.0
 
-[node name="CometDrop" type="RigidBody2D"]
+[node name="BaseCollectableItem" type="RigidBody2D"]
 mass = 0.623
 physics_material_override = SubResource("PhysicsMaterial_1w4er")
 gravity_scale = 1.3
