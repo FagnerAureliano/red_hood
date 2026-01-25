@@ -1359,9 +1359,7 @@ _attack_combo_timer = NodePath("AttackCombo")
 [node name="Texture" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("_character", "_attack_area_colision")]
 position = Vector2(4, 1)
 sprite_frames = SubResource("SpriteFrames_kjduu")
-animation = &"star_drop"
 autoplay = "idle"
-frame_progress = 0.3769537
 script = ExtResource("3_ugqs2")
 _character = NodePath("..")
 _attack_area_colision = NodePath("../AttackArea/Collision")

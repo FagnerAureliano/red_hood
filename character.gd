@@ -37,7 +37,7 @@ const throwable_bow_scene: PackedScene = preload("res://throwables/character_bow
 @export_category("Variables")
 @export var _speed: float = 150.0
 @export var _jump_velocity: float = -280.0
-@export var _character_health: int = 10
+@export var _character_health: int = 40
 @export var _knockback_speed: float = 10.0
 
 @export_category("Objects")
