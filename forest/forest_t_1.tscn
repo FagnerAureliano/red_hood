@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=4 uid="uid://buwjrbu222kmc"]
+[gd_scene load_steps=7 format=4 uid="uid://buwjrbu222kmc"]
 
 [ext_resource type="PackedScene" uid="uid://dejdc3log8cny" path="res://base_level.tscn" id="1_jpu17"]
 [ext_resource type="PackedScene" uid="uid://d22rr0rsb88u3" path="res://collectable/bow/collectable_bow.tscn" id="2_l7fun"]
 [ext_resource type="PackedScene" uid="uid://bs1ebcii77o5r" path="res://collectable/knife/collectable_knife.tscn" id="3_b8hya"]
 [ext_resource type="PackedScene" uid="uid://dx744pv0v6cbl" path="res://collectable/axe/collectable_axe.tscn" id="4_e1vv7"]
 [ext_resource type="PackedScene" uid="uid://dg62074wfoewf" path="res://entities/enemy/spider/spider.tscn" id="5_4j73u"]
+[ext_resource type="PackedScene" uid="uid://cx7d8h6laarep" path="res://ui/hud.tscn" id="6_0usgc"]
 
 [node name="ForestT1" instance=ExtResource("1_jpu17")]
 
@@ -16,7 +17,7 @@ tile_map_data = PackedByteArray("AAAAAAoAAQABAAQAAAABAAoAAQABAAQAAAACAAoAAQABAAQ
 z_index = -1
 position = Vector2(99, 321)
 
-[node name="Camera2D" parent="Character" index="4"]
+[node name="Camera2D" parent="Character" index="5"]
 position = Vector2(0, -120)
 anchor_mode = 1
 
@@ -31,3 +32,5 @@ position = Vector2(447, 272)
 
 [node name="Spider" parent="Enemies" index="0" instance=ExtResource("5_4j73u")]
 position = Vector2(407, 323)
+
+[node name="HUD" parent="." index="7" instance=ExtResource("6_0usgc")]

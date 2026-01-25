@@ -41,9 +41,9 @@ const throwable_bow_scene: PackedScene = preload("res://throwables/character_bow
 @export var _knockback_speed: float = 10.0
 
 @export_category("Objects")
+@export var _inventory: CharacterInventory
 @export var _character_texture: CharacterTexture
 @export var _attack_combo_timer: Timer
-
 
 func _ready() -> void:
 	if _attack_combo_timer != null:
@@ -318,9 +318,7 @@ func _knockback(_entity) -> void:
 
 func collect_item(_items: Array) -> void:
 	print("Collecting items: %s" % _items)
-	for item_id in _items:
-		# Implement item collection logic here.
-		pass
+	_inventory.add_items(_items)
 
 func _on_attack_combo_timeout() -> void:
 	_knife_combo_step = 0
@@ -332,4 +330,3 @@ func _on_action_finished(_action_name: String) -> void:
 
 func is_dead() -> bool:
 	return _character_health <= 0
-

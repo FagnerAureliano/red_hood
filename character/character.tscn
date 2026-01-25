@@ -1,4 +1,4 @@
-[gd_scene load_steps=194 format=3 uid="uid://724f011om128"]
+[gd_scene load_steps=187 format=3 uid="uid://724f011om128"]
 
 [ext_resource type="Texture2D" uid="uid://be21md7ugafvh" path="res://character/movements/idle sheet-Sheet.png" id="1_glpr6"]
 [ext_resource type="Script" uid="uid://eptrb34tkv44" path="res://character.gd" id="1_pjt0s"]
@@ -1304,8 +1304,9 @@ size = Vector2(16, 29)
 [sub_resource type="CircleShape2D" id="CircleShape2D_tgjim"]
 radius = 15.56
 
-[node name="Character" type="CharacterBody2D" node_paths=PackedStringArray("_character_texture", "_attack_combo_timer")]
+[node name="Character" type="CharacterBody2D" node_paths=PackedStringArray("_inventory", "_character_texture", "_attack_combo_timer")]
 script = ExtResource("1_pjt0s")
+_inventory = NodePath("CharacterInventory")
 _character_texture = NodePath("Texture")
 _attack_combo_timer = NodePath("AttackCombo")
 

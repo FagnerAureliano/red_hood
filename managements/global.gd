@@ -4,6 +4,8 @@ class_name Global
 
 const damage_popup_scene: PackedScene = preload("res://ui/damage_popup/damage_popup.tscn")
 
+var ui_inventory: InventoryUI = null
+
 @export_category("UI")
 @export var show_damage_numbers: bool = true
 
@@ -41,3 +43,5 @@ func spawn_damage_popup(amount: int, _initial_position: Vector2, _offset: Vector
 	elif popup is Node2D:
 		popup.global_position = _initial_position + _offset
 	get_tree().current_scene.add_child(popup)
+
+
