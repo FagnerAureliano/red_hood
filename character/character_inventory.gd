@@ -11,30 +11,22 @@ func _ready():
 	pass
 
 func add_item(_item: Dictionary) -> void:
-# Item data: { "path": "res://collectables_by_drop/spider/bow_drop.png", "type": "resource", "value": 5, "spawn_chance": 1.0 }
-# Dropping item: bow_drop
-# Item data: { "path": "res://collectables_by_drop/spider/bow_drop.png", "type": "equipment", "value": 1, "spawn_chance": 0.3, "attributes": { "bow": true, "damage": 10 } }
+	var _item_key = _item.keys()[0]
+	var _item_data = _item[_item_key]
+	var _item_type = _item_data.get("type", "resource")
 	
-	for _slot in _inventory_data:
-
-		if _inventory_data[_slot].is_empty():
-			continue
-
-		var _slot_keys: Array = _inventory_data[_slot].keys()
-		var _slot_item_name: String = _slot_keys[0]
- 
-		if _slot_keys[0] == _item.keys()[0]:
-			if _item[_item.keys()[0]]["type"] == "equipment":
-				_inventory_data[_slot][_slot_item_name]["amount"] += 1
-				global.ui_inventory.update_inventory(_slot, _inventory_data[_slot][_slot_item_name])
+	# Stack resource items
+	if _item_type == "resource":
+		for _slot in _inventory_data:
+			if _inventory_data[_slot].has(_item_key):
+				_inventory_data[_slot][_item_key]["amount"] += 1
+				global.ui_inventory.update_inventory(_slot, _inventory_data[_slot][_item_key])
 				return
- 
 
-	for slot in _inventory_data:
-		if _inventory_data[slot] == {}:
-			_inventory_data[slot] = _item
-			var _slot_keys: Array = _inventory_data[slot].keys()
-			var _slot_item_name: String = _slot_keys[0]
-			_inventory_data[slot][_slot_item_name]["amount"] = 1
-			global.ui_inventory.update_inventory(slot, _inventory_data[slot][_slot_item_name])
+	# Add to new slot (equipment or new resource)
+	for _slot in _inventory_data:
+		if _inventory_data[_slot].is_empty():
+			_inventory_data[_slot] = _item.duplicate(true)
+			_inventory_data[_slot][_item_key]["amount"] = 1
+			global.ui_inventory.update_inventory(_slot, _inventory_data[_slot][_item_key])
 			break

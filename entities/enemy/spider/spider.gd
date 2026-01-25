@@ -21,7 +21,7 @@ func _ready() -> void:
 func _get_drop_items() -> Dictionary:
 	return {
 		"spider_web": {
-			"path": "res://collectables_by_drop/spider/bow_drop.png",
+			"path": "res://collectables_by_drop/spider/web.png",
 			"type": "resource",
 			"value": 5,
 			"spawn_chance": 1.0
@@ -45,6 +45,7 @@ func _drop_item(_item_name: String, _item_data: Dictionary) -> void:
 	var drop := collectable_item_scene.instantiate() as BaseCollectableItem
 	if drop == null:
 		return
+	drop.set_drop_data(_item_data)
 	var parent := get_parent()
 	if parent == null:
 		return
@@ -54,4 +55,4 @@ func _drop_item(_item_name: String, _item_data: Dictionary) -> void:
 	var side := _drop_rng.randf_range(80.0, 140.0)
 	if _drop_rng.randf() < 0.5:
 		side = - side
-	drop.call_deferred("kick", Vector2(side, -140.0))
+	drop.call_deferred("kick", Vector2(side, -240.0))

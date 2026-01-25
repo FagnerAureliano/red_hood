@@ -170,11 +170,8 @@ func _kill() -> void:
 	velocity = Vector2.ZERO
 	_is_alive = false
 
-	for _item in _drop_items_list:
-		#probality dados do item: { "path": "res://collectables_by_drop/spider/bow_drop.png", "type": "resource", "value": 5, "spawn_chance": 1.0 }
-		var chance = _drop_items_list[_item].get("spawn_chance", 0.0)
-		if randf() <= chance:
-			_drop_item(_item, _drop_items_list[_item])
+	if not _drop_items_list.is_empty():
+		_drop_item("LootBag", _drop_items_list)
 
 
 func _drop_item(_item_name: String, _item_data: Dictionary) -> void:

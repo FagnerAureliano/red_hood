@@ -19,11 +19,45 @@ class_name BaseCollectableItem
 @export_category("Loot")
 @export var loot_table: Array[String] = []
 
+var _drop_data: Dictionary = {}
 var _trail_points: PackedVector2Array = PackedVector2Array()
 var _rng := RandomNumberGenerator.new()
 
 @onready var _trail_line: Line2D = $Trail
 @onready var _tail_particles: GPUParticles2D = $TailParticles
+
+func set_drop_data(data: Dictionary) -> void:
+	_drop_data = data
+
+func _on_collectable_area_body_entered(body: Node2D) -> void:
+	if body is BaseCharacter:
+		_collect_items(body)
+
+func _collect_items(character: BaseCharacter) -> void:
+	if _drop_data.is_empty():
+		queue_free()
+		return
+		
+	# Visual feedback
+	global.spawn_effect("res://visual_effects/dust_particles/jump/jump_effect.tscn", Vector2.ZERO, global_position, false)
+
+	var _inventory = character.get_node_or_null("CharacterInventory")
+	if _inventory == null:
+		return
+		
+	# Iterate through all possible drops and roll for each
+	for item_key in _drop_data:
+		var item_info = _drop_data[item_key]
+		var chance = item_info.get("spawn_chance", 0.0)
+		
+		if _rng.randf() <= chance:
+			# Construct the item dictionary expected by inventory
+			# The inventory expects { "item_name": { ...data... } }
+			var item_to_add = { item_key: item_info }
+			_inventory.add_item(item_to_add)
+			print("Collected item: ", item_key)
+			
+	queue_free()
 
 func _ready() -> void:
 	_rng.randomize()
@@ -34,10 +68,10 @@ func _ready() -> void:
 		_tail_particles.amount = tail_particle_amount
 		_tail_particles.lifetime = tail_particle_lifetime
 		if _tail_particles.process_material is ParticleProcessMaterial:
-			var material := _tail_particles.process_material as ParticleProcessMaterial
-			material.color = tail_color
-			material.scale_min = tail_particle_size * 0.6
-			material.scale_max = tail_particle_size
+			var _particle_mat := _tail_particles.process_material as ParticleProcessMaterial
+			_particle_mat.color = tail_color
+			_particle_mat.scale_min = tail_particle_size * 0.6
+			_particle_mat.scale_max = tail_particle_size
 
 	queue_redraw()
 
@@ -68,25 +102,3 @@ func kick(impulse: Vector2 = Vector2.ZERO) -> void:
 			side = - side
 		impulse = Vector2(side, kick_up_impulse)
 	apply_impulse(impulse)
-
-
-func _on_body_entered(body: Node) -> void:
-	if not (body is BaseCharacter):
-		return
-	if loot_table.is_empty():
-		queue_free()
-		return
-
-	var item_index := _rng.randi_range(0, loot_table.size() - 1)
-	var item_id := loot_table[item_index]
-	if body.has_method("add_item"):
-		body.call("add_item", item_id)
-	queue_free()
-
-
-func _on_collectable_area_body_entered(_body) -> void:
-	if _body is BaseCharacter:
-		global.spawn_effect("res://visual_effects/dust_particles/jump/jump_effect.tscn",
-        Vector2.ZERO, global_position, false)
-		_body.collect_item(loot_table)
-		queue_free()

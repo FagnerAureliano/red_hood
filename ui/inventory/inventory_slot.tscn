@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://dydl0imkqyxen"]
+[gd_scene load_steps=15 format=3 uid="uid://dydl0imkqyxen"]
 
 [ext_resource type="Script" uid="uid://b3i6kwrgd7qyi" path="res://ui/inventory/inventory_slot.gd" id="1_nktrt"]
+[ext_resource type="FontFile" uid="uid://durtnc0bh7ls6" path="res://ui/fonts/old_style/njo_14.ttf" id="3_hct3i"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_huu8b"]
 
@@ -24,7 +25,15 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1ktrr"]
 
-[node name="InventorySlot" type="Button"]
+[sub_resource type="LabelSettings" id="LabelSettings_e2a1b"]
+line_spacing = 0.0
+font = ExtResource("3_hct3i")
+font_size = 14
+shadow_size = 0
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(0, 1)
+
+[node name="InventorySlot" type="Button" node_paths=PackedStringArray("_slot_texture", "_amount_label")]
 custom_minimum_size = Vector2(16, 16)
 theme_override_styles/normal = SubResource("StyleBoxEmpty_huu8b")
 theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_hct3i")
@@ -39,6 +48,8 @@ theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_4e05k")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_1ktrr")
 flat = true
 script = ExtResource("1_nktrt")
+_slot_texture = NodePath("SlotTexture")
+_amount_label = NodePath("Label")
 
 [node name="SlotTexture" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(16, 16)
@@ -56,3 +67,13 @@ grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
 stretch_mode = 5
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 0
+offset_right = 5.0
+offset_bottom = 14.0
+text = "1"
+label_settings = SubResource("LabelSettings_e2a1b")
+horizontal_alignment = 2
+vertical_alignment = 2
