@@ -1,4 +1,4 @@
-[gd_scene load_steps=186 format=3 uid="uid://724f011om128"]
+[gd_scene load_steps=193 format=3 uid="uid://724f011om128"]
 
 [ext_resource type="Texture2D" uid="uid://be21md7ugafvh" path="res://character/movements/idle sheet-Sheet.png" id="1_glpr6"]
 [ext_resource type="Script" uid="uid://eptrb34tkv44" path="res://character.gd" id="1_pjt0s"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cgwiuytl0qeqe" path="res://character/movements/dead hit.png" id="4_b4qc5"]
 [ext_resource type="Texture2D" uid="uid://boojtr7j45mmv" path="res://character/movements/itch light atk sheet-Sheet.png" id="5_tgjim"]
 [ext_resource type="Texture2D" uid="uid://dpd7o06aqefsm" path="res://character/movements/run turnaround-Sheet.png" id="7_8brn5"]
+[ext_resource type="Texture2D" uid="uid://2da51vypov58" path="res://visual_effects/dust_particles/star.png" id="7_hd715"]
 [ext_resource type="Texture2D" uid="uid://exwvv6tpk035" path="res://character/movements/run turnaround_left_Sheet.png" id="8_b4qc5"]
 [ext_resource type="Script" uid="uid://co5xl76er64ml" path="res://character/character_attack_area.gd" id="8_wy5t8"]
 [ext_resource type="Texture2D" uid="uid://ukkf1jeot43q" path="res://character/movements/wall slide-Sheet.png" id="9_hd715"]
@@ -658,6 +659,30 @@ region = Rect2(240, 0, 80, 64)
 atlas = ExtResource("7_8brn5")
 region = Rect2(320, 0, 80, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_cn5mg"]
+atlas = ExtResource("7_hd715")
+region = Rect2(16, 1, 108, 113)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_255te"]
+atlas = ExtResource("7_hd715")
+region = Rect2(125, 1, 108, 113)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_myhy3"]
+atlas = ExtResource("7_hd715")
+region = Rect2(234, 1, 108, 113)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b0ejm"]
+atlas = ExtResource("7_hd715")
+region = Rect2(343, 1, 108, 113)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e7vu2"]
+atlas = ExtResource("7_hd715")
+region = Rect2(452, 1, 108, 113)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t30rr"]
+atlas = ExtResource("7_hd715")
+region = Rect2(16, 115, 108, 113)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_wb140"]
 atlas = ExtResource("9_hd715")
 region = Rect2(0, 0, 80, 64)
@@ -1264,6 +1289,29 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_cn5mg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_255te")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_myhy3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b0ejm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e7vu2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t30rr")
+}],
+"loop": true,
+"name": &"star_drop",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_wb140")
 }, {
 "duration": 1.0,
@@ -1311,10 +1359,9 @@ _attack_combo_timer = NodePath("AttackCombo")
 [node name="Texture" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("_character", "_attack_area_colision")]
 position = Vector2(4, 1)
 sprite_frames = SubResource("SpriteFrames_kjduu")
-animation = &"dead_hit"
+animation = &"star_drop"
 autoplay = "idle"
-frame = 7
-frame_progress = 1.0
+frame_progress = 0.3769537
 script = ExtResource("3_ugqs2")
 _character = NodePath("..")
 _attack_area_colision = NodePath("../AttackArea/Collision")
