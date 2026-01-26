@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bavlbejcriytc" path="res://background/background.tscn" id="1_5vx1e"]
 [ext_resource type="PackedScene" uid="uid://bhowyfevd0lfp" path="res://terrain/Terrain.tscn" id="2_eesb3"]
 [ext_resource type="PackedScene" uid="uid://724f011om128" path="res://character/character.tscn" id="3_eesb3"]
+[ext_resource type="PackedScene" uid="uid://snow_gen_uuid_fake" path="res://visual_effects/weather/snow_generator.tscn" id="4_snow"]
 
 [node name="BaseLevel" type="Node2D"]
 
@@ -13,5 +14,8 @@ position = Vector2(-316, -152)
 
 [node name="Character" parent="." instance=ExtResource("3_eesb3")]
 position = Vector2(-1, 0)
+
+[node name="SnowGenerator" parent="Character" instance=ExtResource("4_snow")]
+position = Vector2(0, -160)
 
 [node name="Enemies" type="Node2D" parent="."]

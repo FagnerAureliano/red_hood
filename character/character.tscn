@@ -1,4 +1,4 @@
-[gd_scene load_steps=189 format=3 uid="uid://724f011om128"]
+[gd_scene format=3 uid="uid://724f011om128"]
 
 [ext_resource type="Texture2D" uid="uid://be21md7ugafvh" path="res://character/movements/idle sheet-Sheet.png" id="1_glpr6"]
 [ext_resource type="Script" uid="uid://eptrb34tkv44" path="res://character.gd" id="1_pjt0s"]
@@ -1315,14 +1315,14 @@ size = Vector2(16, 29)
 [sub_resource type="CircleShape2D" id="CircleShape2D_tgjim"]
 radius = 15.56
 
-[node name="Character" type="CharacterBody2D" node_paths=PackedStringArray("_inventory", "_character_texture", "_attack_combo_timer")]
+[node name="Character" type="CharacterBody2D" unique_id=450275839 node_paths=PackedStringArray("_inventory", "_character_texture", "_attack_combo_timer")]
 collision_mask = 5
 script = ExtResource("1_pjt0s")
 _inventory = NodePath("CharacterInventory")
 _character_texture = NodePath("Texture")
 _attack_combo_timer = NodePath("AttackCombo")
 
-[node name="Texture" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("_character", "_attack_area_colision")]
+[node name="Texture" type="AnimatedSprite2D" parent="." unique_id=28985976 node_paths=PackedStringArray("_character", "_attack_area_colision")]
 position = Vector2(4, 1)
 sprite_frames = SubResource("SpriteFrames_kjduu")
 animation = &"attack_3_with_axe"
@@ -1331,29 +1331,28 @@ script = ExtResource("3_ugqs2")
 _character = NodePath("..")
 _attack_area_colision = NodePath("../AttackArea/Collision")
 
-[node name="Collision" type="CollisionShape2D" parent="."]
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=1000348205]
 position = Vector2(-1, 5)
 shape = SubResource("RectangleShape2D_3d8aq")
 
-[node name="AttackCombo" type="Timer" parent="."]
+[node name="AttackCombo" type="Timer" parent="." unique_id=739899123]
 wait_time = 0.64
 one_shot = true
 
-[node name="AttackArea" type="Area2D" parent="."]
+[node name="AttackArea" type="Area2D" parent="." unique_id=1430302455]
 collision_mask = 5
 script = ExtResource("8_wy5t8")
 
-[node name="Collision" type="CollisionShape2D" parent="AttackArea"]
+[node name="Collision" type="CollisionShape2D" parent="AttackArea" unique_id=612606638]
 position = Vector2(22, 2)
 shape = SubResource("CircleShape2D_tgjim")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-anchor_mode = 0
+[node name="Camera2D" type="Camera2D" parent="." unique_id=657868128]
+position = Vector2(0, -80)
 ignore_rotation = false
 position_smoothing_enabled = true
-disabled = true
 
-[node name="CharacterInventory" type="Node" parent="."]
+[node name="CharacterInventory" type="Node" parent="." unique_id=948212593]
 script = ExtResource("15_hq3og")
 
 [connection signal="frame_changed" from="Texture" to="Texture" method="_on_frame_changed"]

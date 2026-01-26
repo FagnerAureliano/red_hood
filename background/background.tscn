@@ -1,40 +1,40 @@
-[gd_scene load_steps=5 format=3 uid="uid://bavlbejcriytc"]
+[gd_scene format=3 uid="uid://bavlbejcriytc"]
 
-[ext_resource type="Texture2D" uid="uid://c8s6fipsvdy4x" path="res://background/old/Layer_0010_1.png" id="1_02vw1"]
-[ext_resource type="Texture2D" uid="uid://b0b200hms22da" path="res://background/forest_bg.png" id="3_qjy44"]
+[ext_resource type="Texture2D" uid="uid://chvv0akshpykx" path="res://background/forest_sky.png" id="2_qjy44"]
+[ext_resource type="Texture2D" uid="uid://bq5odjlsqkls3" path="res://background/forest-bg.png" id="2_r0sni"]
 [ext_resource type="Texture2D" uid="uid://me1gtfrt5cuo" path="res://background/forest_bg_2.png" id="4_qjy44"]
 [ext_resource type="Script" uid="uid://daxjyxwvi0qyi" path="res://background.gd" id="13_bgscript"]
 
-[node name="Background" type="ParallaxBackground"]
+[node name="Background" type="ParallaxBackground" unique_id=1456314019]
 script = ExtResource("13_bgscript")
 
-[node name="Sky" type="ParallaxLayer" parent="."]
+[node name="Sky" type="ParallaxLayer" parent="." unique_id=1296237312]
 motion_scale = Vector2(1, 0.1)
 motion_mirroring = Vector2(640, 360)
 
-[node name="Texture" type="TextureRect" parent="Sky"]
+[node name="Texture" type="TextureRect" parent="Sky" unique_id=713248779]
 custom_minimum_size = Vector2(640, 360)
 offset_right = 40.0
 offset_bottom = 40.0
-texture = ExtResource("1_02vw1")
+texture = ExtResource("2_qjy44")
 expand_mode = 1
 
-[node name="Tree" type="ParallaxLayer" parent="."]
+[node name="Tree" type="ParallaxLayer" parent="." unique_id=28354756]
 motion_scale = Vector2(0.6, 1)
-motion_mirroring = Vector2(640, 360)
+motion_mirroring = Vector2(640, 0)
 
-[node name="Texture" type="TextureRect" parent="Tree"]
+[node name="Texture" type="TextureRect" parent="Tree" unique_id=1476276658]
 custom_minimum_size = Vector2(640, 360)
 offset_right = 40.0
 offset_bottom = 40.0
-texture = ExtResource("3_qjy44")
+texture = ExtResource("2_r0sni")
 expand_mode = 1
 
-[node name="DefaultBackground" type="ParallaxLayer" parent="."]
+[node name="DefaultBackground" type="ParallaxLayer" parent="." unique_id=1125440144]
 motion_scale = Vector2(0.9, 0.7)
 motion_mirroring = Vector2(640, 0)
 
-[node name="Texture" type="TextureRect" parent="DefaultBackground"]
+[node name="Texture" type="TextureRect" parent="DefaultBackground" unique_id=811079694]
 custom_minimum_size = Vector2(640, 360)
 offset_right = 40.0
 offset_bottom = 40.0
