@@ -23,6 +23,8 @@ color = Color(1, 1, 1, 0.6)
 radius = 5.0
 
 [node name="BaseCollectableItem" type="RigidBody2D"]
+collision_layer = 0
+collision_mask = 1
 mass = 0.623
 physics_material_override = SubResource("PhysicsMaterial_1w4er")
 gravity_scale = 1.3

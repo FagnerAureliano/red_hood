@@ -14,9 +14,4 @@ position = Vector2(-316, -152)
 [node name="Character" parent="." instance=ExtResource("3_eesb3")]
 position = Vector2(-1, 0)
 
-[node name="Camera2D" type="Camera2D" parent="Character"]
-anchor_mode = 0
-ignore_rotation = false
-position_smoothing_enabled = true
-
 [node name="Enemies" type="Node2D" parent="."]

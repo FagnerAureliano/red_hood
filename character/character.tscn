@@ -1,4 +1,4 @@
-[gd_scene load_steps=187 format=3 uid="uid://724f011om128"]
+[gd_scene load_steps=189 format=3 uid="uid://724f011om128"]
 
 [ext_resource type="Texture2D" uid="uid://be21md7ugafvh" path="res://character/movements/idle sheet-Sheet.png" id="1_glpr6"]
 [ext_resource type="Script" uid="uid://eptrb34tkv44" path="res://character.gd" id="1_pjt0s"]
@@ -213,67 +213,75 @@ region = Rect2(1120, 0, 65, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aoi1a"]
 atlas = ExtResource("2_o6jyn")
-region = Rect2(342, 1080, 111, 135)
+region = Rect2(560, 1072, 111, 134)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o53dv"]
 atlas = ExtResource("2_o6jyn")
-region = Rect2(231, 1080, 111, 135)
+region = Rect2(448, 1072, 111, 134)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mb68s"]
 atlas = ExtResource("2_o6jyn")
-region = Rect2(120, 1080, 111, 135)
+region = Rect2(336, 1072, 111, 134)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k8lcv"]
 atlas = ExtResource("2_o6jyn")
-region = Rect2(9, 1080, 111, 135)
+region = Rect2(224, 1072, 111, 134)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c2hdl"]
 atlas = ExtResource("2_o6jyn")
-region = Rect2(1230, 1215, 111, 135)
+region = Rect2(112, 1072, 111, 134)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3x0qm"]
 atlas = ExtResource("2_o6jyn")
-region = Rect2(1119, 1215, 111, 135)
+region = Rect2(0, 1072, 111, 134)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2c1xj"]
 atlas = ExtResource("2_o6jyn")
-region = Rect2(1008, 1215, 111, 135)
+region = Rect2(1232, 1206, 111, 134)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h82v8"]
 atlas = ExtResource("2_o6jyn")
-region = Rect2(897, 1215, 111, 135)
+region = Rect2(1120, 1206, 111, 134)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_12ovv"]
 atlas = ExtResource("2_o6jyn")
-region = Rect2(786, 1215, 111, 135)
+region = Rect2(1008, 1206, 111, 134)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8k3bw"]
 atlas = ExtResource("2_o6jyn")
-region = Rect2(675, 1215, 111, 135)
+region = Rect2(896, 1206, 111, 134)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t5ir6"]
 atlas = ExtResource("2_o6jyn")
-region = Rect2(564, 1215, 111, 135)
+region = Rect2(784, 1206, 111, 134)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rhqpp"]
 atlas = ExtResource("2_o6jyn")
-region = Rect2(453, 1215, 111, 135)
+region = Rect2(672, 1206, 111, 134)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tvc3p"]
 atlas = ExtResource("2_o6jyn")
-region = Rect2(342, 1215, 111, 135)
+region = Rect2(560, 1206, 111, 134)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gkcby"]
 atlas = ExtResource("2_o6jyn")
-region = Rect2(231, 1215, 111, 135)
+region = Rect2(448, 1206, 111, 134)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6s3ev"]
 atlas = ExtResource("2_o6jyn")
-region = Rect2(120, 1215, 111, 135)
+region = Rect2(336, 1206, 111, 134)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uf6oh"]
 atlas = ExtResource("2_o6jyn")
-region = Rect2(9, 1215, 111, 135)
+region = Rect2(224, 1206, 111, 134)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cn5mg"]
+atlas = ExtResource("2_o6jyn")
+region = Rect2(112, 1206, 111, 134)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_255te"]
+atlas = ExtResource("2_o6jyn")
+region = Rect2(0, 1206, 111, 134)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y8opw"]
 atlas = ExtResource("5_tgjim")
@@ -867,9 +875,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_q3cms")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_aoi1a")
 }, {
 "duration": 1.0,
@@ -916,6 +921,12 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_uf6oh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cn5mg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_255te")
 }],
 "loop": false,
 "name": &"attack_3_with_axe",
@@ -1305,6 +1316,7 @@ size = Vector2(16, 29)
 radius = 15.56
 
 [node name="Character" type="CharacterBody2D" node_paths=PackedStringArray("_inventory", "_character_texture", "_attack_combo_timer")]
+collision_mask = 5
 script = ExtResource("1_pjt0s")
 _inventory = NodePath("CharacterInventory")
 _character_texture = NodePath("Texture")
@@ -1313,7 +1325,7 @@ _attack_combo_timer = NodePath("AttackCombo")
 [node name="Texture" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("_character", "_attack_area_colision")]
 position = Vector2(4, 1)
 sprite_frames = SubResource("SpriteFrames_kjduu")
-animation = &"idle"
+animation = &"attack_3_with_axe"
 autoplay = "idle"
 script = ExtResource("3_ugqs2")
 _character = NodePath("..")
@@ -1328,11 +1340,17 @@ wait_time = 0.64
 one_shot = true
 
 [node name="AttackArea" type="Area2D" parent="."]
+collision_mask = 5
 script = ExtResource("8_wy5t8")
 
 [node name="Collision" type="CollisionShape2D" parent="AttackArea"]
 position = Vector2(22, 2)
 shape = SubResource("CircleShape2D_tgjim")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+ignore_rotation = false
+position_smoothing_enabled = true
 disabled = true
 
 [node name="CharacterInventory" type="Node" parent="."]

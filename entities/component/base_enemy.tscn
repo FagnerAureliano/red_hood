@@ -7,6 +7,7 @@
 [sub_resource type="SpriteFrames" id="SpriteFrames_lgj3r"]
 
 [node name="BaseEnemy" type="CharacterBody2D" node_paths=PackedStringArray("_enemy_texture", "_knockback_timer")]
+collision_layer = 4
 position = Vector2(-3, 0)
 script = ExtResource("1_sbdll")
 _enemy_texture = NodePath("Texture")
