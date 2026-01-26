@@ -72,9 +72,8 @@ func action_animation(_action_name: String) -> void:
 	# we still won't leave the hitbox active.
 	_disable_attack_area()
 
-	if _action_name == "archer_attack":
-		play(_action_name)
-		return 
+	# Force restart to ensure signals emit correctly
+	stop()
 	play(_action_name)
 
 func _on_animation_finished() -> void:

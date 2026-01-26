@@ -176,8 +176,9 @@ func _vertical_movement(_delta: float) -> void:
 		if not _on_floor:
 			global.spawn_effect("res://visual_effects/dust_particles/fall/fall_effect.tscn",
 			Vector2(0, 11), global_position, false)
-			_character_texture.action_animation("land")
-			set_physics_process(false)
+			if not _on_knockback:
+				_character_texture.action_animation("land")
+				set_physics_process(false)
 			_on_floor = true
 
 		_jump_count = 0
