@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://dx744pv0v6cbl"]
 
-[ext_resource type="PackedScene" uid="uid://cs3hg7fulrtmd" path="res://collectable/collectable_component.tscn" id="1_ttoqi"]
-[ext_resource type="Texture2D" uid="uid://qhvc17khfdxj" path="res://collectable/axe/axe.png" id="2_4058j"]
-[ext_resource type="Script" uid="uid://cp5p06bownpp8" path="res://collectable/axe/collectable_axe.gd" id="3_axe_script"]
+[ext_resource type="PackedScene" uid="uid://cs3hg7fulrtmd" path="res://collectables_by_drop/collectable/collectable_component.tscn" id="1_ttoqi"]
+[ext_resource type="Texture2D" uid="uid://qhvc17khfdxj" path="res://collectables_by_drop/collectable/axe/axe.png" id="2_4058j"]
+[ext_resource type="Script" uid="uid://cp5p06bownpp8" path="res://collectables_by_drop/collectable/axe/collectable_axe.gd" id="3_axe_script"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q61uf"]
 atlas = ExtResource("2_4058j")

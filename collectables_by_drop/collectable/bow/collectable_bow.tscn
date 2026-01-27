@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://d22rr0rsb88u3"]
 
-[ext_resource type="PackedScene" uid="uid://cs3hg7fulrtmd" path="res://collectable/collectable_component.tscn" id="1_rjojk"]
-[ext_resource type="Texture2D" uid="uid://blj4cpl0ex5k3" path="res://collectable/bow/boww.png" id="2_wkx6y"]
-[ext_resource type="Script" uid="uid://bx7mvlf1il62u" path="res://collectable/bow/collectable_bow.gd" id="2_y4ru4"]
+[ext_resource type="PackedScene" uid="uid://cs3hg7fulrtmd" path="res://collectables_by_drop/collectable/collectable_component.tscn" id="1_rjojk"]
+[ext_resource type="Texture2D" uid="uid://blj4cpl0ex5k3" path="res://collectables_by_drop/collectable/bow/boww.png" id="2_wkx6y"]
+[ext_resource type="Script" uid="uid://bx7mvlf1il62u" path="res://collectables_by_drop/collectable/bow/collectable_bow.gd" id="2_y4ru4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8t1v5"]
 atlas = ExtResource("2_wkx6y")

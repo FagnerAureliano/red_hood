@@ -77,10 +77,13 @@ func action_animation(_action_name: String) -> void:
 	play(_action_name)
 
 func _on_animation_finished() -> void:
+	_disable_attack_area()
+
 	if _current_action == "dead_hit":
+		if _character != null and _character.has_method("_on_action_finished"):
+			_character.call("_on_action_finished", _current_action)
 		return
 	
-	_disable_attack_area()
 	_character.set_physics_process(true)
 	_is_on_action = false
 	if _character != null and _character.has_method("_on_action_finished"):

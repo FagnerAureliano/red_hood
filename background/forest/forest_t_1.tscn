@@ -1,9 +1,9 @@
 [gd_scene format=4 uid="uid://d043buku8ve6q"]
 
 [ext_resource type="PackedScene" uid="uid://dejdc3log8cny" path="res://base_level.tscn" id="1_cwupa"]
-[ext_resource type="PackedScene" uid="uid://d22rr0rsb88u3" path="res://collectable/bow/collectable_bow.tscn" id="2_47itv"]
-[ext_resource type="PackedScene" uid="uid://bs1ebcii77o5r" path="res://collectable/knife/collectable_knife.tscn" id="3_rghtd"]
-[ext_resource type="PackedScene" uid="uid://dx744pv0v6cbl" path="res://collectable/axe/collectable_axe.tscn" id="4_bphtf"]
+[ext_resource type="PackedScene" uid="uid://d22rr0rsb88u3" path="res://collectables_by_drop/collectable/bow/collectable_bow.tscn" id="2_47itv"]
+[ext_resource type="PackedScene" uid="uid://bs1ebcii77o5r" path="res://collectables_by_drop/collectable/knife/collectable_knife.tscn" id="3_rghtd"]
+[ext_resource type="PackedScene" uid="uid://dx744pv0v6cbl" path="res://collectables_by_drop/collectable/axe/collectable_axe.tscn" id="4_bphtf"]
 [ext_resource type="PackedScene" uid="uid://dg62074wfoewf" path="res://entities/enemy/spider/spider.tscn" id="5_6qbu6"]
 [ext_resource type="PackedScene" uid="uid://cx7d8h6laarep" path="res://ui/hud.tscn" id="6_7qbeh"]
 

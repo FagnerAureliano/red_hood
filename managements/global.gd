@@ -8,11 +8,25 @@ const slash_scene: PackedScene = preload("res://visual_effects/slash_effect/slas
 const impact_lines_scene: PackedScene = preload("res://visual_effects/impact_lines/impact_lines.tscn")
 const ghost_scene: PackedScene = preload("res://visual_effects/ghost_effect/ghost_effect.tscn")
 const dash_dust_scene: PackedScene = preload("res://visual_effects/dash_effect/dash_dust.tscn")
+const transition_screen_scene: PackedScene = preload("res://ui/transition_screen/transition_screen.tscn")
 
 var ui_inventory: InventoryUI = null
+var _transition_screen_ref: TransitionScreen = null
 
 @export_category("UI")
 @export var show_damage_numbers: bool = true
+
+
+func game_over_reload() -> void:
+	if _transition_screen_ref == null:
+		_transition_screen_ref = transition_screen_scene.instantiate()
+		get_tree().root.add_child(_transition_screen_ref)
+
+	_transition_screen_ref.fade_in()
+	await _transition_screen_ref.on_transition_finished
+	get_tree().paused = false
+	get_tree().reload_current_scene()
+	_transition_screen_ref.fade_out()
 
 
 func spawn_effect(_path: String, _offset: Vector2, _initial_position: Vector2, _is_flipped: bool) -> void:
@@ -109,5 +123,3 @@ func spawn_damage_popup(amount: int, _initial_position: Vector2, _offset: Vector
 	elif popup is Node2D:
 		popup.global_position = _initial_position + _offset
 	get_tree().current_scene.add_child(popup)
-
-

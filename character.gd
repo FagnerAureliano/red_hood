@@ -351,6 +351,9 @@ func _on_action_finished(_action_name: String) -> void:
 	if _action_name == "hit":
 		_on_knockback = false
 
+	if _action_name == "dead_hit":
+		global.game_over_reload()
+
 func is_dead() -> bool:
 	return _character_health <= 0
 

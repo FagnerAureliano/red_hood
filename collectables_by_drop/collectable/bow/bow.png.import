@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qhvc17khfdxj"
-path="res://.godot/imported/axe.png-7101817074a2d9873e87ef5826d1c466.ctex"
+uid="uid://4lihgpussnbd"
+path="res://.godot/imported/bow.png-9bc8585a893daffc9451f8ac1aa40b58.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://collectable/axe/axe.png"
-dest_files=["res://.godot/imported/axe.png-7101817074a2d9873e87ef5826d1c466.ctex"]
+source_file="res://collectables_by_drop/collectable/bow/bow.png"
+dest_files=["res://.godot/imported/bow.png-9bc8585a893daffc9451f8ac1aa40b58.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0bob8yd0y6ii"
-path="res://.godot/imported/knife.png-44731daf1adfb9cbf8dbf81811a78f62.ctex"
+uid="uid://cdta5ij8y68jj"
+path="res://.godot/imported/potion_hp.png-6b557c0924b72e349e94f485ca5f81d5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://collectable/knife/knife.png"
-dest_files=["res://.godot/imported/knife.png-44731daf1adfb9cbf8dbf81811a78f62.ctex"]
+source_file="res://collectables_by_drop/collectable_item/potion_hp.png"
+dest_files=["res://.godot/imported/potion_hp.png-6b557c0924b72e349e94f485ca5f81d5.ctex"]
 
 [params]
 

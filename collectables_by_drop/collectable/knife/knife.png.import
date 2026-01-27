@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://blj4cpl0ex5k3"
-path="res://.godot/imported/boww.png-6bb6b71626c0b606fc7b9c2c0498e813.ctex"
+uid="uid://c0bob8yd0y6ii"
+path="res://.godot/imported/knife.png-3ac54dc5d30e91bfb505d204b2624bdb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://collectable/bow/boww.png"
-dest_files=["res://.godot/imported/boww.png-6bb6b71626c0b606fc7b9c2c0498e813.ctex"]
+source_file="res://collectables_by_drop/collectable/knife/knife.png"
+dest_files=["res://.godot/imported/knife.png-3ac54dc5d30e91bfb505d204b2624bdb.ctex"]
 
 [params]
 
