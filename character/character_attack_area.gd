@@ -10,8 +10,8 @@ func _on_body_entered(_body: Node2D) -> void:
 		
 		var attacker := get_parent()
 		if attacker:
-			# if attacker.get("_character_texture"):
-			# 	global.spawn_slash(_body.global_position, attacker._character_texture.flip_h)
+			if attacker.get("_character_texture"):
+				global.spawn_slash(_body.global_position, attacker._character_texture.flip_h)
 			
 			if attacker.has_method("camera_shake"):
 				attacker.camera_shake()

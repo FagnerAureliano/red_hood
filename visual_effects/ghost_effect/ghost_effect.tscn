@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ghosteffect123"]
+
+[ext_resource type="Script" path="res://visual_effects/ghost_effect/ghost_effect.gd" id="1_ghost_script"]
+
+[node name="GhostEffect" type="Sprite2D"]
+script = ExtResource("1_ghost_script")

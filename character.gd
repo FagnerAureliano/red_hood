@@ -40,6 +40,16 @@ const throwable_bow_scene: PackedScene = preload("res://throwables/character_bow
 @export var _character_health: int = 40
 @export var _knockback_speed: float = 10.0
 
+@export_category("Dash")
+@export var _dash_speed: float = 450.0
+@export var _dash_duration: float = 0.2
+@export var _dash_cooldown: float = 1.0
+
+var _is_dashing: bool = false
+var _dash_timer: float = 0.0
+var _dash_cooldown_timer: float = 0.0
+var _dash_ghost_timer: float = 0.0
+
 @export_category("Objects")
 @export var _inventory: CharacterInventory
 @export var _character_texture: CharacterTexture
@@ -147,6 +157,18 @@ func _start_attack_combo_timer(extra_time_sec: float = 0.0) -> void:
 
 
 func _physics_process(_delta: float) -> void:
+	if _dash_cooldown_timer > 0:
+		_dash_cooldown_timer -= _delta
+
+	# Verifica input ANTES e se não estiver dando dash
+	if not _is_dashing and Input.is_key_pressed(KEY_R) and _dash_cooldown_timer <= 0 and is_on_floor():
+		_start_dash()
+
+	if _is_dashing:
+		_process_dash(_delta)
+		move_and_slide()
+		return
+
 	_vertical_movement(_delta)
 	_horizontal_movement()
 	move_and_slide()
@@ -331,3 +353,38 @@ func _on_action_finished(_action_name: String) -> void:
 
 func is_dead() -> bool:
 	return _character_health <= 0
+
+
+func _start_dash() -> void:
+	_is_dashing = true
+	_dash_timer = _dash_duration
+	_dash_cooldown_timer = _dash_cooldown
+	
+	# Play dash animation
+	_character_texture.play("dash_move")
+	
+	# Dash direction
+	var dir = -1.0 if _character_texture.flip_h else 1.0
+	velocity.x = dir * _dash_speed
+	velocity.y = 0
+	
+	# VFX
+	global.spawn_ghost(_character_texture)
+	# Spawna a poeira no pé (ajuste o Vector2 se necessário, ex: Vector2(0, 16))
+	global.spawn_dash_dust(global_position + Vector2(0, 10), _character_texture.flip_h)
+	
+	_dash_ghost_timer = 0.05
+
+
+func _process_dash(_delta: float) -> void:
+	_dash_timer -= _delta
+	velocity.y = 0 
+	
+	_dash_ghost_timer -= _delta
+	if _dash_ghost_timer <= 0:
+		_dash_ghost_timer = 0.05
+		global.spawn_ghost(_character_texture)
+	
+	if _dash_timer <= 0:
+		_is_dashing = false
+		velocity.x = 0

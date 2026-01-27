@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dashdust123"]
+
+[ext_resource type="Script" path="res://visual_effects/dash_effect/dash_dust.gd" id="1_dust_script"]
+
+[node name="DashDust" type="Node2D"]
+script = ExtResource("1_dust_script")

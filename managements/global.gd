@@ -6,6 +6,8 @@ const damage_popup_scene: PackedScene = preload("res://ui/damage_popup/damage_po
 const impact_spark_scene: PackedScene = preload("res://visual_effects/hit_spark/hit_spark.tscn")
 const slash_scene: PackedScene = preload("res://visual_effects/slash_effect/slash_effect.tscn")
 const impact_lines_scene: PackedScene = preload("res://visual_effects/impact_lines/impact_lines.tscn")
+const ghost_scene: PackedScene = preload("res://visual_effects/ghost_effect/ghost_effect.tscn")
+const dash_dust_scene: PackedScene = preload("res://visual_effects/dash_effect/dash_dust.tscn")
 
 var ui_inventory: InventoryUI = null
 
@@ -34,17 +36,48 @@ func spawn_effect(_path: String, _offset: Vector2, _initial_position: Vector2, _
 
 
 func spawn_impact_spark(_initial_position: Vector2) -> void:
-	# Partículas
+	# Partículas (Hit Spark)
 	if impact_spark_scene:
 		var _spark = impact_spark_scene.instantiate()
 		_spark.global_position = _initial_position
 		get_tree().current_scene.add_child(_spark)
 	
-	# Efeito de linhas estilo cartoon (novo)
+	# Efeito de linhas estilo cartoon
 	if impact_lines_scene:
 		var _lines = impact_lines_scene.instantiate()
 		_lines.global_position = _initial_position
 		get_tree().current_scene.add_child(_lines)
+
+
+func spawn_ghost(target_sprite: AnimatedSprite2D) -> void:
+	# Cria o rastro do personagem (efeito flash/dash)
+	if ghost_scene == null or target_sprite == null:
+		return
+		
+	var ghost = ghost_scene.instantiate()
+	get_tree().current_scene.add_child(ghost)
+	
+	if ghost.has_method("set_ghost_properties"):
+		ghost.set_ghost_properties(target_sprite)
+
+
+func spawn_dash_dust(_initial_position: Vector2, _is_flipped: bool) -> void:
+	if dash_dust_scene == null:
+		return
+		
+	var dust = dash_dust_scene.instantiate()
+	dust.global_position = _initial_position
+	
+	# Se o char olhar pra esquerda (flip_h=true), a poeira (que vai pra trás) 
+	# deve ser espelhada para ir pra direita.
+	# O script dash_dust move partículas para -X (esquerda).
+	# Se char olha pra Direita (flip=false): Back é Esquerda (-X). OK. Escala 1.
+	# Se char olha pra Esquerda (flip=true): Back é Direita (+X). Precisa inverter. Escala -1.
+	
+	if _is_flipped:
+		dust.scale.x = -1
+	
+	get_tree().current_scene.add_child(dust)
 
 
 func spawn_slash(_initial_position: Vector2, _is_flipped: bool) -> void:

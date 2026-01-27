@@ -323,6 +323,22 @@ region = Rect2(1840, 0, 65, 80)
 atlas = ExtResource("5_tgjim")
 region = Rect2(1920, 0, 65, 80)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_0shic"]
+atlas = ExtResource("3_hx151")
+region = Rect2(1205, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wlm6a"]
+atlas = ExtResource("3_hx151")
+region = Rect2(1365, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mbhnd"]
+atlas = ExtResource("3_hx151")
+region = Rect2(1285, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c0nog"]
+atlas = ExtResource("3_hx151")
+region = Rect2(1445, 0, 80, 80)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_11qjq"]
 atlas = ExtResource("4_b4qc5")
 region = Rect2(826, 0, 116, 101)
@@ -514,22 +530,6 @@ region = Rect2(1045, 0, 80, 80)
 [sub_resource type="AtlasTexture" id="AtlasTexture_6610h"]
 atlas = ExtResource("3_hx151")
 region = Rect2(1125, 0, 80, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0shic"]
-atlas = ExtResource("3_hx151")
-region = Rect2(1205, 0, 80, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mbhnd"]
-atlas = ExtResource("3_hx151")
-region = Rect2(1285, 0, 80, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wlm6a"]
-atlas = ExtResource("3_hx151")
-region = Rect2(1365, 0, 80, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_c0nog"]
-atlas = ExtResource("3_hx151")
-region = Rect2(1445, 0, 80, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6y17u"]
 atlas = ExtResource("4_0rvpn")
@@ -978,6 +978,26 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_0shic")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wlm6a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mbhnd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wlm6a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c0nog")
+}],
+"loop": false,
+"name": &"dash_move",
+"speed": 16.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_11qjq")
 }, {
 "duration": 1.0,
@@ -1325,8 +1345,10 @@ _attack_combo_timer = NodePath("AttackCombo")
 [node name="Texture" type="AnimatedSprite2D" parent="." unique_id=28985976 node_paths=PackedStringArray("_character", "_attack_area_colision")]
 position = Vector2(4, 1)
 sprite_frames = SubResource("SpriteFrames_kjduu")
-animation = &"attack_3_with_axe"
+animation = &"dash_move"
 autoplay = "idle"
+frame = 4
+frame_progress = 1.0
 script = ExtResource("3_ugqs2")
 _character = NodePath("..")
 _attack_area_colision = NodePath("../AttackArea/Collision")
