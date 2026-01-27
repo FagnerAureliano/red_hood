@@ -12,6 +12,8 @@ var _on_knockback: bool = false
 var _knife_combo_step: int = 0
 var _axe_combo_step: int = 0
 
+var _fsm: CharacterStateMachine
+
 var _pending_axe_vfx: bool = false
 var _pending_axe_vfx_step: int = 0
 var _pending_axe_vfx_offset: Vector2 = Vector2.ZERO
@@ -68,6 +70,8 @@ func _ready() -> void:
 
 	# Prevent initial camera drift when smoothing is enabled.
 	call_deferred("_snap_camera_on_start")
+
+	_setup_fsm()
 
 
 func _process(delta: float) -> void:
@@ -157,40 +161,15 @@ func _start_attack_combo_timer(extra_time_sec: float = 0.0) -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	if _dash_cooldown_timer > 0:
-		_dash_cooldown_timer -= _delta
-
-	# Verifica input ANTES e se não estiver dando dash
-	if not _is_dashing and Input.is_key_pressed(KEY_R) and _dash_cooldown_timer <= 0 and is_on_floor():
-		_start_dash()
-
-	if _is_dashing:
-		_process_dash(_delta)
-		move_and_slide()
+	if _fsm == null:
 		return
-
-	_vertical_movement(_delta)
-	_horizontal_movement()
-	move_and_slide()
-	_character_texture.animate(velocity)
+	_fsm.physics_process(_delta)
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	# Don't buffer clicks: only accept a new attack when the previous action finished.
-	if _character_texture != null and _character_texture.is_in_action():
+	if _fsm == null:
 		return
-
-	if _has_bow and event.is_action_pressed("archer_attack"):
-		_bow_attack()
-		return
-
-	if _has_knife and event.is_action_pressed("knife_attack"):
-		knife_attack()
-		return
-
-	if _has_axe and event.is_action_pressed("axe_attack"):
-		axe_attack()
-		return
+	_fsm.handle_input(event)
 
 
 func _vertical_movement(_delta: float) -> void:
@@ -198,7 +177,7 @@ func _vertical_movement(_delta: float) -> void:
 		if not _on_floor:
 			global.spawn_effect("res://visual_effects/dust_particles/fall/fall_effect.tscn",
 			Vector2(0, 11), global_position, false)
-			if not _on_knockback:
+			if not _on_knockback and is_in_state("normal"):
 				_character_texture.action_animation("land")
 				set_physics_process(false)
 			_on_floor = true
@@ -210,7 +189,7 @@ func _vertical_movement(_delta: float) -> void:
 		_on_floor = false
 		velocity += get_gravity() * _delta
 
-	if Input.is_action_just_pressed("jump") and (_jump_count < 2):
+	if is_in_state("normal") and Input.is_action_just_pressed("jump") and (_jump_count < 2):
 		velocity.y = _jump_velocity
 		_jump_count += 1
 		global.spawn_effect("res://visual_effects/dust_particles/jump/jump_effect.tscn",
@@ -321,14 +300,19 @@ func spawn_bow_projectile(_facing_left: bool) -> void:
 	bow_instance.call_deferred("set_global_position", global_position + Vector2(0, 0))
 
 func update_health(_value: int, _entity) -> void:
+	if is_in_state("dead"):
+		return
+
 	_knockback(_entity)
 	_character_health -= _value
 	if _character_health <= 0:
 		_character_health = 0
+		_set_state("dead")
 		_character_texture.action_animation("dead_hit")
 		set_physics_process(false)
 
 		return
+	_set_state("hit")
 	_character_texture.action_animation("hit")
 
 func _knockback(_entity) -> void:
@@ -350,6 +334,13 @@ func _on_attack_combo_timeout() -> void:
 func _on_action_finished(_action_name: String) -> void:
 	if _action_name == "hit":
 		_on_knockback = false
+		_set_state("normal")
+
+	if _action_name == "land":
+		_set_state("normal")
+
+	if _action_name == "archer_attack" or _action_name.begins_with("attack_"):
+		_set_state("normal")
 
 	if _action_name == "dead_hit":
 		global.game_over_reload()
@@ -391,3 +382,26 @@ func _process_dash(_delta: float) -> void:
 	if _dash_timer <= 0:
 		_is_dashing = false
 		velocity.x = 0
+
+func _setup_fsm() -> void:
+	_fsm = CharacterStateMachine.new()
+	add_child(_fsm)
+	_fsm.setup(self, {
+		"normal": preload("res://scripts/FSM/character_normal_state.gd"),
+		"attack": preload("res://scripts/FSM/character_attack_state.gd"),
+		"hit": preload("res://scripts/FSM/character_hit_state.gd"),
+		"dash": preload("res://scripts/FSM/character_dash_state.gd"),
+		"dead": preload("res://scripts/FSM/character_dead_state.gd")
+	})
+	_fsm.change_state("normal")
+
+func _set_state(_name: String) -> void:
+	if _fsm != null:
+		_fsm.change_state(_name)
+
+func is_in_state(_name: String) -> bool:
+	return _fsm != null and _fsm.is_in_state(_name)
+
+func _tick_dash_cooldown(_delta: float) -> void:
+	if _dash_cooldown_timer > 0.0:
+		_dash_cooldown_timer = maxf(_dash_cooldown_timer - _delta, 0.0)

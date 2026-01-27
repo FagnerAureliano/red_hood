@@ -7,5 +7,5 @@ func _on_body_entered(body: Node2D) -> void:
 		_consume(body)
 
 
-func _consume(character: BaseCharacter) -> void:
+func _consume(_character: BaseCharacter) -> void:
 	queue_free()
