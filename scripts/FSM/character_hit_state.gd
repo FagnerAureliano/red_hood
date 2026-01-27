@@ -7,8 +7,7 @@ func handle_input(_event: InputEvent) -> void:
 	pass
 
 func physics_process(_delta: float) -> void:
-	actor._tick_dash_cooldown(_delta)
-	actor._vertical_movement(_delta)
-	actor._horizontal_movement()
-	actor.move_and_slide()
-	actor._character_texture.animate(actor.velocity)
+	if actor._movement_component == null:
+		return
+	actor._movement_component.tick_dash_cooldown(_delta)
+	actor._movement_component.process_hit(_delta)

@@ -14,6 +14,10 @@
 [ext_resource type="Texture2D" uid="uid://ukkf1jeot43q" path="res://character/movements/wall slide-Sheet.png" id="9_hd715"]
 [ext_resource type="Texture2D" uid="uid://brsn2tv4e2fcf" path="res://character/movements/wall slide-Sheet-right.png" id="10_hq3og"]
 [ext_resource type="Script" uid="uid://dtytkp1l0tsh4" path="res://character/character_inventory.gd" id="15_hq3og"]
+[ext_resource type="Script" path="res://scripts/camera_rig.gd" id="16_t3hrk"]
+[ext_resource type="Script" path="res://scripts/components/character_input_component.gd" id="17_8q8re"]
+[ext_resource type="Script" path="res://scripts/components/character_movement_component.gd" id="18_2mmg2"]
+[ext_resource type="Script" path="res://scripts/components/character_combat_component.gd" id="19_gm1d0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4d2y3"]
 atlas = ExtResource("2_o6jyn")
@@ -1373,6 +1377,16 @@ shape = SubResource("CircleShape2D_tgjim")
 position = Vector2(0, -80)
 ignore_rotation = false
 position_smoothing_enabled = true
+script = ExtResource("16_t3hrk")
+
+[node name="CharacterInput" type="Node" parent="."]
+script = ExtResource("17_8q8re")
+
+[node name="CharacterMovement" type="Node" parent="."]
+script = ExtResource("18_2mmg2")
+
+[node name="CharacterCombat" type="Node" parent="."]
+script = ExtResource("19_gm1d0")
 
 [node name="CharacterInventory" type="Node" parent="." unique_id=948212593]
 script = ExtResource("15_hq3og")
