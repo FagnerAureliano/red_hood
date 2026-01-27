@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://ckhsrhe8515ra"]
+
+[ext_resource type="Script" uid="uid://dp1ak751ablx" path="res://visual_effects/impact_lines/impact_lines.gd" id="1_lines_script"]
+
+[node name="ImpactLines" type="Node2D" unique_id=1330678199]
+script = ExtResource("1_lines_script")
+line_color = Color(1, 1, 1, 0.69411767)
+line_thickness = 1.0
+max_radius_base = 20.0
