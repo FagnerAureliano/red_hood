@@ -4,6 +4,9 @@ class_name CharacterCombatComponent
 
 var actor: BaseCharacter
 
+@export_category("Objects")
+@export var _attack_combo_timer: Timer
+
 var _has_bow: bool = false
 var _has_knife: bool = false
 var _has_axe: bool = false
@@ -20,8 +23,10 @@ var _combo_wait_time_base: float = 0.0
 
 func setup(_actor: BaseCharacter) -> void:
 	actor = _actor
-	if actor._attack_combo_timer != null:
-		_combo_wait_time_base = actor._attack_combo_timer.wait_time
+	if _attack_combo_timer == null:
+		_attack_combo_timer = actor.get_node_or_null("AttackCombo") as Timer
+	if _attack_combo_timer != null:
+		_combo_wait_time_base = _attack_combo_timer.wait_time
 
 func has_bow() -> bool:
 	return _has_bow
@@ -46,11 +51,11 @@ func update_axe_state(_state: bool) -> void:
 		_axe_combo_step = 0
 
 func start_attack_combo_timer(extra_time_sec: float = 0.0) -> void:
-	if actor._attack_combo_timer == null:
+	if _attack_combo_timer == null:
 		return
 	if _combo_wait_time_base > 0.0:
-		actor._attack_combo_timer.wait_time = _combo_wait_time_base + extra_time_sec
-	actor._attack_combo_timer.start()
+		_attack_combo_timer.wait_time = _combo_wait_time_base + extra_time_sec
+	_attack_combo_timer.start()
 
 func bow_attack() -> void:
 	if not actor.is_on_floor():

@@ -1339,12 +1339,11 @@ size = Vector2(16, 29)
 [sub_resource type="CircleShape2D" id="CircleShape2D_tgjim"]
 radius = 15.56
 
-[node name="Character" type="CharacterBody2D" unique_id=450275839 node_paths=PackedStringArray("_inventory", "_character_texture", "_attack_combo_timer")]
+[node name="Character" type="CharacterBody2D" unique_id=450275839 node_paths=PackedStringArray("_inventory", "_character_texture")]
 collision_mask = 5
 script = ExtResource("1_pjt0s")
 _inventory = NodePath("CharacterInventory")
 _character_texture = NodePath("Texture")
-_attack_combo_timer = NodePath("AttackCombo")
 
 [node name="Texture" type="AnimatedSprite2D" parent="." unique_id=28985976 node_paths=PackedStringArray("_character", "_attack_area_colision")]
 position = Vector2(4, 1)
@@ -1385,8 +1384,9 @@ script = ExtResource("17_8q8re")
 [node name="CharacterMovement" type="Node" parent="."]
 script = ExtResource("18_2mmg2")
 
-[node name="CharacterCombat" type="Node" parent="."]
+[node name="CharacterCombat" type="Node" parent="." node_paths=PackedStringArray("_attack_combo_timer")]
 script = ExtResource("19_gm1d0")
+_attack_combo_timer = NodePath("../AttackCombo")
 
 [node name="CharacterInventory" type="Node" parent="." unique_id=948212593]
 script = ExtResource("15_hq3og")

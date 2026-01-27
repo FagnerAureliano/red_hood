@@ -2,10 +2,6 @@ extends CharacterBody2D
 
 class_name BaseCharacter
  
-@warning_ignore("unused_private_class_variable")
-var _jump_count: int = 0
-@warning_ignore("unused_private_class_variable")
-var _on_floor: bool = true
 var _on_knockback: bool = false
 
 var _fsm: CharacterStateMachine
@@ -18,35 +14,13 @@ var _combat_component: CharacterCombatComponent
 const throwable_bow_scene: PackedScene = preload("res://throwables/character_bow/character_bow.tscn")
 
 @export_category("Variables")
-@warning_ignore("unused_private_class_variable")
-@export var _speed: float = 150.0
-@warning_ignore("unused_private_class_variable")
-@export var _jump_velocity: float = -280.0
 @export var _character_health: int = 40
 @export var _knockback_speed: float = 10.0
-
-@export_category("Dash")
-@warning_ignore("unused_private_class_variable")
-@export var _dash_speed: float = 450.0
-@warning_ignore("unused_private_class_variable")
-@export var _dash_duration: float = 0.2
-@warning_ignore("unused_private_class_variable")
-@export var _dash_cooldown: float = 1.0
-
-@warning_ignore("unused_private_class_variable")
-var _is_dashing: bool = false
-@warning_ignore("unused_private_class_variable")
-var _dash_timer: float = 0.0
-@warning_ignore("unused_private_class_variable")
-var _dash_cooldown_timer: float = 0.0
-@warning_ignore("unused_private_class_variable")
-var _dash_ghost_timer: float = 0.0
 
 @export_category("Objects")
 @export var _inventory: CharacterInventory
 @export var _character_texture: CharacterTexture
-@warning_ignore("unused_private_class_variable")
-@export var _attack_combo_timer: Timer
+
 
 func _ready() -> void:
 	_camera_rig = get_node_or_null("Camera2D") as CameraRig
