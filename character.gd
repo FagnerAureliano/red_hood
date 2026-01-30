@@ -27,6 +27,16 @@ func _ready() -> void:
 
 	_setup_fsm()
 	_setup_components()
+	_setup_lighting()
+
+
+func _setup_lighting() -> void:
+	if not has_node("CharacterLightComponent"):
+		var light = CharacterLightComponent.new()
+		light.name = "CharacterLightComponent"
+		add_child(light)
+
+
 
 
 func camera_shake(strength: float = 3.5, duration: float = 0.07) -> void:
